@@ -3,7 +3,6 @@ package ru.job4j.it;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
@@ -58,7 +57,6 @@ public class MatrixItTest {
         assertThat(it.next(), is(2));
     }
 
-    @Ignore
     @Test
     public void whenEmpty() {
         int[][] in = {
@@ -68,7 +66,6 @@ public class MatrixItTest {
         assertThat(it.hasNext(), is(false));
     }
 
-    @Ignore
     @Test(expected = NoSuchElementException.class)
     public void whenEmptyThenNext() {
         int[][] in = {
@@ -88,7 +85,6 @@ public class MatrixItTest {
         assertThat(it.hasNext(), is(true));
     }
 
-    @Ignore
     @Test
     public void whenNoElements() {
         int[][] in = {{}, {}, {}};

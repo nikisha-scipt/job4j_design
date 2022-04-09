@@ -15,11 +15,11 @@ public class MatrixIt implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        while ((column >= data[row].length)) {
+        while (row < data.length && column == data[row].length) {
             row++;
             column = 0;
         }
-        return column != data[row].length || row < data.length - 1;
+        return row < data.length;
     }
 
     @Override
@@ -30,11 +30,4 @@ public class MatrixIt implements Iterator<Integer> {
         return data[row][column++];
     }
 
-
-    public static void main(String[] args) {
-        int[][] arr = {{}, {}};
-        MatrixIt matrixIt = new MatrixIt(arr);
-        System.out.println(matrixIt.hasNext());
-
-    }
 }
