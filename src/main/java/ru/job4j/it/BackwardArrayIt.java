@@ -9,17 +9,13 @@ public class BackwardArrayIt implements Iterator<Integer> {
     private int point = 0;
 
     public BackwardArrayIt(int[] data) {
-        if (data.length == 0) {
-            throw new NoSuchElementException();
-        } else {
-            this.data = data;
-            this.point = data.length - 1;
-        }
+        this.data = data;
+        this.point = data.length - 1;
     }
 
     @Override
     public boolean hasNext() {
-        return data.length > point;
+        return this.point >= 0;
     }
 
     @Override
