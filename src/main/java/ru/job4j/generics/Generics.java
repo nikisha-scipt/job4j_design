@@ -22,10 +22,12 @@ public class Generics {
 
         gen.printBoundedWildCard(first);
         gen.printBoundedWildCard(second);
+        /* gen.printBoundedWildCard(third); */
         System.out.println();
 
+        /* gen.printLowerBoundedWildCard(first); */
         gen.printLowerBoundedWildCard(second);
-
+        gen.printLowerBoundedWildCard(third);
     }
 
     public void printObject(List<?> list) {
