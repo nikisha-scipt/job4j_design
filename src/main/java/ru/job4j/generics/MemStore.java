@@ -9,23 +9,15 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public void add(T model) {
-        for (Map.Entry<String, T> entry : storage.entrySet()) {
-            if (entry.getKey().equals(model.getId())) {
-                return;
-            }
-        }
-        storage.put(model.getId(), model);
+        storage.putIfAbsent(model.getId(), model);
     }
 
     @Override
     public boolean replace(String id, T model) {
         boolean result = false;
-        for (Map.Entry<String, T> entry: storage.entrySet()) {
-            if (entry.getKey().equals(id)) {
-                entry.setValue(model);
-                result = true;
-                break;
-            }
+        if (storage.containsKey(id)) {
+            storage.replace(id, model);
+            result = true;
         }
         return result;
     }
