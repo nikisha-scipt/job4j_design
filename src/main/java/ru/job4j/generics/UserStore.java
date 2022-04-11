@@ -10,12 +10,12 @@ public class UserStore implements Store<User> {
     }
 
     @Override
-    public boolean replace(String id, User model) {
+    public User replace(String id, User model) {
         return store.replace(id, model);
     }
 
     @Override
-    public boolean delete(String id) {
+    public User delete(String id) {
         return store.delete(id);
     }
 
