@@ -69,4 +69,26 @@ public class UserStoreTest {
         assertThat(result.getUsername(), is("Petr"));
     }
 
+    @Test
+
+    public void whenDeleteUserThenTrue() {
+
+        UserStore store = new UserStore();
+
+        store.add(new User("1", "Petr"));
+
+        boolean rsl = store.delete("1");
+
+        assertTrue(rsl);
+
+        User result = store.findById("1");
+
+        assertNull(result);
+
+        rsl = store.delete("2");
+
+        assertFalse(rsl);
+
+    }
+
 }
