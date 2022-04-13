@@ -20,6 +20,11 @@ public class SimpleArrayList<T> implements List<T> {
         this.container = (T[]) new Object[defaultCapacity];
     }
 
+    public SimpleArrayList(Collection<? extends T> arr) {
+        this.container = (T[]) new Object[arr.size()];
+        System.arraycopy(arr, 0, container, 0, arr.size());
+    }
+
     @Override
     public void add(T value) {
         if (size == container.length) {
@@ -30,7 +35,7 @@ public class SimpleArrayList<T> implements List<T> {
     }
 
     private void grow() {
-        container = container.length != 0 ? Arrays.copyOf(container, container.length * 2) : Arrays.copyOf(container, container.length);
+        container = container.length != 0 ? Arrays.copyOf(container, container.length * 2) : Arrays.copyOf(container, container.length + 10);
     }
 
     @Override
@@ -43,16 +48,16 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public T remove(int index) {
         T value = get(index);
-        container[index] = null;
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
         modCount++;
         size--;
+        container[container.length - index] = null;
         return value;
     }
 
     @Override
     public T get(int index) {
-        Objects.checkIndex(index, container.length);
+        Objects.checkIndex(index, size);
         return container[index];
     }
 
@@ -61,7 +66,7 @@ public class SimpleArrayList<T> implements List<T> {
         return size;
     }
 
-    public int getDefaultCapacity() {
+    private int getDefaultCapacity() {
         return defaultCapacity;
     }
 
@@ -89,6 +94,22 @@ public class SimpleArrayList<T> implements List<T> {
                 return container[pointer++];
             }
         };
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("{ ");
+        Iterator<T> it = iterator();
+        int check = 0;
+        while (it.hasNext()) {
+            if (check == size - 1) {
+                sb.append(it.next());
+                break;
+            }
+            sb.append(it.next()).append(", ");
+            check++;
+        }
+        return sb.append(" }").toString();
     }
 
 }

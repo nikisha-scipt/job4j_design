@@ -22,18 +22,6 @@ public class SimpleArrayListTest {
     }
 
     @Test
-    public void whenCreateEmptyArrayList() {
-        SimpleArrayList<Integer> arr = new SimpleArrayList<>();
-        Assert.assertEquals(10, arr.getDefaultCapacity());
-    }
-
-    @Test
-    public void whenCreateArrayListDefaultCapacityIs20() {
-        SimpleArrayList<Integer> arr = new SimpleArrayList<>(20);
-        Assert.assertEquals(20, arr.getDefaultCapacity());
-    }
-
-    @Test
     public void whenAddThenSizeIncrease() {
         Assert.assertEquals(3, list.size());
     }
