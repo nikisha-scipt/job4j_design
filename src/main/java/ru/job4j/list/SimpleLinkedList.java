@@ -21,6 +21,7 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
         public Node(E data) {
             this.data = data;
         }
+
     }
 
 
@@ -57,7 +58,7 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
 
             final int expectedModCount = modCount;
             private Node<E> current = firstElement;
-            private Node<E> previous = null;
+
 
             @Override
             public boolean hasNext() {
@@ -73,9 +74,9 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
                     throw new NoSuchElementException();
                 }
                 E nextData = current.data;
-                previous = current;
                 current = current.next;
                 return nextData;
+
             }
         };
     }
