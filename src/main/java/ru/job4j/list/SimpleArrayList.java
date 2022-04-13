@@ -20,9 +20,9 @@ public class SimpleArrayList<T> implements List<T> {
         this.container = (T[]) new Object[defaultCapacity];
     }
 
-    public SimpleArrayList(Collection<? extends T> arr) {
-        this.container = (T[]) new Object[arr.size()];
-        System.arraycopy(arr, 0, container, 0, arr.size());
+    public SimpleArrayList(T[] arr) {
+        this.container = (T[]) new Object[arr.length];
+        System.arraycopy(arr, 0, container, 0, arr.length);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class SimpleArrayList<T> implements List<T> {
     }
 
     private void grow() {
-        container = container.length != 0 ? Arrays.copyOf(container, container.length * 2) : Arrays.copyOf(container, container.length + 10);
+        container = container.length != 0 ? Arrays.copyOf(container, container.length * 2) : Arrays.copyOf(container, 10);
     }
 
     @Override
