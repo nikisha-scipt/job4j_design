@@ -27,6 +27,13 @@ public class SimpleArrayListTest {
     }
 
     @Test
+    public void whenCreateSimpleArrayListWithExistArr() {
+        Integer[] arr = new Integer[] {1, 2, 3};
+        SimpleArrayList<Integer> myArr = new SimpleArrayList<>(arr);
+        Assert.assertEquals(arr.length, myArr.size());
+    }
+
+    @Test
     public void whenAddAndGetByCorrectIndex() {
         Assert.assertEquals(Integer.valueOf(1), list.get(0));
     }

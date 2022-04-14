@@ -7,22 +7,20 @@ public class SimpleArrayList<T> implements List<T> {
     private T[] container;
     private int size;
     private int modCount;
-    private int defaultCapacity;
 
 
     public SimpleArrayList() {
-        this.defaultCapacity = 10;
-        this.container = (T[]) new Object[defaultCapacity];
+        this.container = (T[]) new Object[10];
     }
 
     public SimpleArrayList(int capacity) {
-        this.defaultCapacity = capacity;
-        this.container = (T[]) new Object[defaultCapacity];
+        this.container = (T[]) new Object[capacity];
     }
 
     public SimpleArrayList(T[] arr) {
         this.container = (T[]) new Object[arr.length];
-        System.arraycopy(arr, 0, container, 0, arr.length);
+        this.size = arr.length;
+        System.arraycopy(arr, 0, this.container, 0, arr.length);
     }
 
     @Override
@@ -66,9 +64,6 @@ public class SimpleArrayList<T> implements List<T> {
         return size;
     }
 
-    private int getDefaultCapacity() {
-        return defaultCapacity;
-    }
 
     @Override
     public Iterator<T> iterator() {
