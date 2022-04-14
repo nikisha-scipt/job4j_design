@@ -67,10 +67,7 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
     }
 
     public boolean revert() {
-        if (isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        if (size == 1) {
+        if (isEmpty() || size == 1) {
             return false;
         }
         Node<E> current = firstElement;

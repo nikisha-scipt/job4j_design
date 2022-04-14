@@ -123,4 +123,38 @@ public class SimpleLinkedListTest {
         assertThat(it.next(), is(2));
     }
 
+    @Test
+    public void whenAddThenIter() {
+        SimpleLinkedList<Integer> linked = new SimpleLinkedList<>();
+        linked.add(1);
+        linked.add(2);
+        Iterator<Integer> it = linked.iterator();
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+    }
+
+    @Test
+    public void whenAddAndRevertThenIter() {
+        SimpleLinkedList<Integer> linked = new SimpleLinkedList<>();
+        linked.add(1);
+        linked.add(2);
+        linked.revert();
+        Iterator<Integer> it = linked.iterator();
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(1));
+    }
+
+    @Test
+    public void whenSize0ThenReturnFalse() {
+        SimpleLinkedList<Integer> emptyList = new SimpleLinkedList<>();
+        assertFalse(emptyList.revert());
+    }
+
+    @Test
+    public void whenSize1ThenReturnFalse() {
+        SimpleLinkedList<Integer> singleList = new SimpleLinkedList<>();
+        singleList.add(1);
+        assertFalse(singleList.revert());
+    }
+
 }
