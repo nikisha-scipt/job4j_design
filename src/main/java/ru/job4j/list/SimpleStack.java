@@ -53,7 +53,7 @@ public class SimpleStack<E> implements MyStack<E> {
         return new Iterator<E>() {
 
             private Node<E> current = head;
-            private int modeCountIterator = modCount;
+            private final int modeCountIterator = modCount;
 
             @Override
             public boolean hasNext() {

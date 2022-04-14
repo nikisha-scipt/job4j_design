@@ -53,6 +53,33 @@ public class SimpleQueue<E> implements MyQueue<E> {
         return value;
     }
 
+    public boolean remove(E value) {
+        Node<E> current = head;
+        Node<E> prev = null;
+
+        while (current != null) {
+            if (value.equals(current.value)) {
+                break;
+            }
+            prev = current;
+            current = current.next;
+        }
+
+        if (current == null) {
+            return false;
+        } else if (current == head) {
+            poll();
+            return true;
+        }
+
+        prev.next = current.next;
+        current.next = null;
+
+        size--;
+        modeCount++;
+        return true;
+    }
+
     @Override
     public boolean isEmpty() {
         return this.size == 0;

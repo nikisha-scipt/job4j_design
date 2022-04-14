@@ -20,14 +20,14 @@ public class SimpleStackTest {
     }
 
     @Test
-    public void whenPushThenPoll() {
+    public void whenPushThenPop() {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.push(1);
         assertThat(stack.pop(), is(1));
     }
 
     @Test
-    public void whenPushPollThenPushPoll() {
+    public void whenPushPollThenPushPop() {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.push(1);
         stack.pop();
@@ -36,12 +36,13 @@ public class SimpleStackTest {
     }
 
     @Test
-    public void whenPushPushThenPollPoll() {
+    public void whenPushPushThenPollPop() {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.push(1);
         stack.push(2);
         stack.pop();
         assertThat(stack.pop(), is(1));
     }
+
 
 }

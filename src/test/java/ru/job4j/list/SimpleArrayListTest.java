@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class SimpleArrayListTest {
 
-    List<Integer> list;
+    MyList<Integer> list;
 
     @Before
     public void initData() {
