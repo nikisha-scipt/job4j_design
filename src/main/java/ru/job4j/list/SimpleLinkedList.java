@@ -14,7 +14,7 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
 
     private static class Node<E> {
 
-        protected final E data;
+        protected E data;
         protected Node<E> next;
         protected Node<E> previous;
 
@@ -60,7 +60,9 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
         Node<E> current = firstElement;
         E data = current.data;
         firstElement = current.next;
-        current = null;
+        current.next = null;
+        current.previous = null;
+        current.data = null;
         size--;
         modCount++;
         return data;
