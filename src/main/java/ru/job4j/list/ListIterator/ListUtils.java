@@ -1,4 +1,4 @@
-package ru.job4j.list;
+package ru.job4j.list.ListIterator;
 
 import java.util.*;
 import java.util.function.Predicate;
