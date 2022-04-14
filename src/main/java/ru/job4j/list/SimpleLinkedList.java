@@ -69,9 +69,7 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
     }
 
     public boolean revert() {
-        if (isEmpty() || size == 1) {
-            return false;
-        }
+        boolean isCheck = !isEmpty() && size != 1;
         Node<E> current = firstElement;
         Node<E> prev = null;
 
@@ -84,7 +82,7 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
 
         firstElement = prev;
 
-        return true;
+        return isCheck;
     }
 
     @Override
