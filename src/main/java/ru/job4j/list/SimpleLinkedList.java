@@ -53,6 +53,25 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
     }
 
     @Override
+    public E deleteFirst() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        Node<E> current = firstElement;
+        E data = current.data;
+        firstElement = current.next;
+        current.next = null;
+        size--;
+        modCount++;
+        return data;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
+    @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
 
@@ -106,6 +125,11 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
         System.out.println(it.next());
         System.out.println(it.next());
         System.out.println(it.next());
+
+        sm.deleteFirst();
+        System.out.println(sm);
+        sm.deleteFirst();
+        System.out.println(sm);
 
     }
 }

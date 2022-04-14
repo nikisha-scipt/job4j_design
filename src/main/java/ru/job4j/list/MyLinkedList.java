@@ -6,4 +6,8 @@ public interface MyLinkedList<E> extends Iterable<E> {
 
     E get(int index);
 
+    E deleteFirst();
+
+    boolean isEmpty();
+
 }

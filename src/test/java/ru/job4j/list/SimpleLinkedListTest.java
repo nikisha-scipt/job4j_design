@@ -5,7 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class SimpleLinkedListTest {
@@ -95,6 +97,30 @@ public class SimpleLinkedListTest {
         assertThat(second.hasNext(), Is.is(true));
         assertThat(second.next(), Is.is(2));
         assertThat(second.hasNext(), Is.is(false));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void whenDeleteFirst() {
+        SimpleLinkedList<Integer> linked = new SimpleLinkedList<>();
+        linked.add(1);
+        linked.deleteFirst();
+        linked.iterator().next();
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void whenDeleteEmptyLinked() {
+        SimpleLinkedList<Integer> linked = new SimpleLinkedList<>();
+        linked.deleteFirst();
+    }
+
+    @Test
+    public void whenMultiDelete() {
+        SimpleLinkedList<Integer> linked = new SimpleLinkedList<>();
+        linked.add(1);
+        linked.add(2);
+        assertThat(linked.deleteFirst(), is(1));
+        Iterator<Integer> it = linked.iterator();
+        assertThat(it.next(), is(2));
     }
 
 }
