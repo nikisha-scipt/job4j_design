@@ -66,6 +66,28 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
         return data;
     }
 
+    public boolean revert() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        if (size == 1) {
+            return false;
+        }
+        Node<E> current = firstElement;
+        Node<E> prev = null;
+
+        while (current != null) {
+            Node<E> next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        firstElement = prev;
+
+        return true;
+    }
+
     @Override
     public boolean isEmpty() {
         return this.size == 0;
@@ -121,14 +143,7 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
         sm.add(1);
         sm.add(2);
         sm.add(3);
-        Iterator<Integer> it = sm.iterator();
-        System.out.println(it.next());
-        System.out.println(it.next());
-        System.out.println(it.next());
-
-        sm.deleteFirst();
-        System.out.println(sm);
-        sm.deleteFirst();
+        System.out.println(sm.revert());
         System.out.println(sm);
 
     }
