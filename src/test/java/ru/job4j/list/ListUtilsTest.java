@@ -33,10 +33,10 @@ public class ListUtilsTest {
     }
 
     @Test
-    public void whenRemoveFirstElement() {
+    public void whenRemoveIfElementMore2() {
         List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3));
-        ListUtils.removeIf(input, e -> e < 2);
-        assertThat(input, Is.is(Arrays.asList(2, 3)));
+        ListUtils.removeIf(input, e -> e > 2);
+        assertThat(input, Is.is(Arrays.asList(1, 2)));
     }
 
     @Test
