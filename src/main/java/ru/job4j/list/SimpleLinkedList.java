@@ -60,7 +60,7 @@ public class SimpleLinkedList<E> implements MyLinkedList<E> {
         Node<E> current = firstElement;
         E data = current.data;
         firstElement = current.next;
-        current.next = null;
+        current = null;
         size--;
         modCount++;
         return data;
