@@ -72,11 +72,7 @@ public class SimpleMap<K, V> implements MyMap<K, V> {
             result = true;
             count++;
             size++;
-        } else if (current.getKey().equals(key)) {
-            table[index] = new MapEntry<>(key, value);
-            result = true;
         }
-
         return result;
     }
 
@@ -86,7 +82,7 @@ public class SimpleMap<K, V> implements MyMap<K, V> {
         int index = indexFor(hash);
         MapEntry<K, V> current = table[index];
         V value = null;
-        if (current != null) {
+        if (current != null && key.equals(current.getKey())) {
             value = current.value;
         }
         return value;
@@ -102,6 +98,7 @@ public class SimpleMap<K, V> implements MyMap<K, V> {
             table[index] = null;
             result = true;
             size--;
+            count++;
         }
         return result;
     }
@@ -129,15 +126,10 @@ public class SimpleMap<K, V> implements MyMap<K, V> {
                 if (modCount != count) {
                     throw new ConcurrentModificationException();
                 }
-
-                for (int i = pointer; i < table.length; i++) {
-                    if (table[i] == null) {
-                        pointer++;
-                        continue;
-                    }
-                    break;
+                while (pointer <= size && table[pointer] == null) {
+                    pointer++;
                 }
-                return table[pointer] != null;
+                return pointer <= size;
             }
 
             @Override

@@ -21,8 +21,8 @@ public class SimpleMapTest {
     public void whenPutAndGetElement() {
         SimpleMap<String, Integer> simpleMap = new SimpleMap<>();
         simpleMap.put("ss", 5);
-        assertTrue(simpleMap.put("ss", 8));
-        assertThat(simpleMap.get("ss"), is(8));
+        assertFalse(simpleMap.put("ss", 8));
+        assertThat(simpleMap.get("ss"), is(5));
     }
 
     @Test
@@ -56,6 +56,7 @@ public class SimpleMapTest {
         assertThat(it.next(), Is.is(3));
         assertThat(it.hasNext(), Is.is(true));
         assertThat(it.next(), Is.is(4));
+        assertThat(it.hasNext(), Is.is(false));
     }
 
 }
