@@ -14,6 +14,8 @@ public class SimpleMap<K, V> implements MyMap<K, V> {
 
         K key;
         V value;
+        MapEntry<K, V> next;
+        MapEntry<K, V> previous;
 
         public MapEntry(K key, V value) {
             this.key = key;
@@ -27,6 +29,8 @@ public class SimpleMap<K, V> implements MyMap<K, V> {
         public K getKey() {
             return key;
         }
+
+
 
         @Override
         public String toString() {
@@ -69,6 +73,15 @@ public class SimpleMap<K, V> implements MyMap<K, V> {
         MapEntry<K, V> current = table[index];
         if (current == null) {
             table[index] = new MapEntry<>(key, value);
+            table[index].next = null;
+            table[index].previous = null;
+            result = true;
+            count++;
+            size++;
+        } else {
+            table[index].previous.next = current;
+            current.previous = table[index].previous;
+            table[index].previous = current;
             result = true;
             count++;
             size++;
@@ -126,10 +139,10 @@ public class SimpleMap<K, V> implements MyMap<K, V> {
                 if (modCount != count) {
                     throw new ConcurrentModificationException();
                 }
-                while (pointer <= size && table[pointer] == null) {
+                while (pointer < table.length && table[pointer] == null) {
                     pointer++;
                 }
-                return pointer <= size;
+                return pointer < table.length;
             }
 
             @Override
