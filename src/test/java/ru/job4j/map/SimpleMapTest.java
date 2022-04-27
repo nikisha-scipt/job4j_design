@@ -21,6 +21,7 @@ public class SimpleMapTest {
     public void whenPutAndGetElement() {
         SimpleMap<String, Integer> simpleMap = new SimpleMap<>();
         simpleMap.put("ss", 5);
+        simpleMap.put("ss", 8);
         assertThat(simpleMap.get("ss"), is(5));
     }
 
