@@ -40,4 +40,22 @@ public class SimpleTree<E> implements Tree<E> {
         }
         return rsl;
     }
+
+    @Override
+    public boolean isBinary() {
+        boolean check = true;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> el = data.poll();
+            if (el.children.size() > 2) {
+                check = false;
+                break;
+            }
+            for (Node<E> child : el.children) {
+                data.offer(child);
+            }
+        }
+        return check;
+    }
 }
