@@ -1,2 +1,4 @@
 10:57:01 - it is time when a server is dropped
-11:02:02
+10:59:01 - it is time when a server is started
+11:01:02 - it is time when a server is dropped
+11:02:02 - it is time when a server is started

@@ -21,14 +21,22 @@ public class Config {
             for (String line = read.readLine(); line != null; line = read.readLine()) {
                 if (line.contains("=")) {
                     String[] temp = line.split("=");
-                    if (temp.length > 2) {
-                        throw new IllegalArgumentException();
-                    }
-                    values.put(temp[0], temp[1]);
+                    addValue(temp);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void addValue(String[] strings) {
+        if (strings.length == 3) {
+            String tempValue = strings[1] + " = " + strings[2];
+            values.put(strings[0], tempValue);
+        } else if (strings.length == 2) {
+            values.put(strings[0], strings[1]);
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -51,8 +59,8 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        Config config = new Config("./data/testMoreValue.properties");
+        Config config = new Config("./data/app.properties");
         config.load();
-        System.out.println(config.value("key"));
+        System.out.println(config.value("hibernate.connection.password"));
     }
 }
