@@ -7,17 +7,19 @@ public class EvenNumberFile {
     public static void main(String[] args) {
 
         try (FileInputStream in = new FileInputStream("even.txt")) {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder str = new StringBuilder();
             int read;
             while ((read = in.read()) != -1) {
-                if (read % 2 == 0) {
-                    stringBuilder.append((char) read);
+                str.append((char) read);
+            }
+            String[] arr = str.toString().split(System.lineSeparator());
+            for (String s : arr) {
+                int x = Integer.parseInt(s);
+                if (x % 2 == 0) {
+                    System.out.println(x);
                 }
             }
-            String[] lines = stringBuilder.toString().split(System.lineSeparator());
-            for (String line : lines) {
-                System.out.println(line);
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
