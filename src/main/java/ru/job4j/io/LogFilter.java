@@ -2,7 +2,6 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LogFilter {
@@ -14,10 +13,10 @@ public class LogFilter {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 temp = line.split(" ");
                 if ("404".equals(temp[temp.length - 2])) {
-                    res.add(Arrays.toString(temp));
+                    res.add(line);
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return res;
@@ -28,7 +27,7 @@ public class LogFilter {
             for (String elem : log) {
                 out.println(elem);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
