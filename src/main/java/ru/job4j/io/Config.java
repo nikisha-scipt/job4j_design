@@ -19,10 +19,11 @@ public class Config {
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             for (String line = read.readLine(); line != null; line = read.readLine()) {
-                if (line.contains("=")) {
-                    String[] temp = line.split("=");
-                    addValue(temp);
+                if (line.isEmpty() || line.startsWith("#")) {
+                    continue;
                 }
+                String[] temp = line.split("=", 2);
+                addValue(temp);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -30,10 +31,7 @@ public class Config {
     }
 
     private void addValue(String[] strings) {
-        if (strings.length == 3) {
-            String tempValue = strings[1] + " = " + strings[2];
-            values.put(strings[0], tempValue);
-        } else if (strings.length == 2) {
+        if (strings.length == 2 && !strings[0].isEmpty() && !strings[1].isEmpty()) {
             values.put(strings[0], strings[1]);
         } else {
             throw new IllegalArgumentException();
@@ -59,8 +57,8 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        Config config = new Config("./data/app.properties");
+        Config config = new Config("./data/testMoreValue.properties");
         config.load();
-        System.out.println(config.value("hibernate.connection.password"));
+        System.out.println(config.value("key"));
     }
 }

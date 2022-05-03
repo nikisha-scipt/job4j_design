@@ -28,7 +28,7 @@ public class ConfigTest {
         String path = "./data/testProperties.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("key"), is("value = 14"));
+        assertThat(config.value("key"), is("value=14"));
     }
 
 }
