@@ -8,16 +8,17 @@ public class Analysis {
         boolean check = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(source));
         PrintWriter writer = new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))) {
+            writer.println("Результат:");
             for (String line = reader.readLine(); line != null; line = reader.readLine()) {
                 String[] temp = line.split(" ");
                 if ("400".equals(temp[0]) || "500".equals(temp[0])) {
                     if (check) {
-                        writer.println(temp[1] + " - it is time when a server is dropped");
+                        writer.print(temp[1] + ";");
                         check = false;
                     }
                 } else if (!check) {
                     check = true;
-                    writer.println(temp[1] + " - it is time when a server is started");
+                    writer.println(temp[1] + ";");
                 }
             }
         } catch (IOException e) {
