@@ -19,8 +19,7 @@ public class SimpleTree<E> implements Tree<E> {
         if (findBy(child).isEmpty()) {
             Optional<Node<E>> node = findBy(parent);
             if (node.isPresent()) {
-                node.get().children.add(new Node<>(child));
-                rsl = true;
+                rsl = node.get().children.add(new Node<>(child));
             }
         }
         return rsl;
