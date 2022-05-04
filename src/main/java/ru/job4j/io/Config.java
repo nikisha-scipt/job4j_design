@@ -23,17 +23,16 @@ public class Config {
                     continue;
                 }
                 String[] temp = line.split("=", 2);
-                addValue(temp);
+                validate(temp);
+                values.put(temp[0], temp[1]);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void addValue(String[] strings) {
-        if (strings.length == 2 && !strings[0].isEmpty() && !strings[1].isEmpty()) {
-            values.put(strings[0], strings[1]);
-        } else {
+    private void validate(String[] strings) {
+        if (strings.length != 2 || strings[0].isEmpty() || strings[1].isEmpty()) {
             throw new IllegalArgumentException();
         }
     }
