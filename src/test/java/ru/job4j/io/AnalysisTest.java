@@ -29,7 +29,8 @@ public class AnalysisTest {
             writer.println("200 10:56:01");
             writer.println("500 10:57:01");
             writer.println("400 10:58:01");
-            writer.println("500 11:01:02");
+            writer.println("500 10:59:01");
+            writer.println("400 11:01:02");
             writer.println("200 11:02:02");
         }
         analysis.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
@@ -45,12 +46,12 @@ public class AnalysisTest {
         File source = folder.newFile("source.txt");
         File target = folder.newFile("target.txt");
         try (PrintWriter writer = new PrintWriter(new BufferedOutputStream(new FileOutputStream(source)))) {
-            writer.println("200 10:56:01\n" +
-                    "500 10:57:01\n" +
-                    "400 10:58:01\n" +
-                    "200 10:59:01\n" +
-                    "500 11:01:02\n" +
-                    "200 11:02:02");
+            writer.println("200 10:56:01");
+            writer.println("500 10:57:01");
+            writer.println("400 10:58:01");
+            writer.println("200 10:59:01");
+            writer.println("500 11:01:02");
+            writer.println("200 11:02:02");
         }
         analysis.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         StringBuilder stringBuilder = new StringBuilder();
