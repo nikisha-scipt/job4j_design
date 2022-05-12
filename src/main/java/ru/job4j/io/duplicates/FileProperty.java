@@ -1,15 +1,22 @@
 package ru.job4j.io.duplicates;
 
+import java.nio.file.Path;
 import java.util.Objects;
 
 public class FileProperty {
 
     private long size;
     private String name;
+    private Path path;
 
-    public FileProperty(long size, String name) {
+    public FileProperty(long size, String name, Path path) {
         this.size = size;
         this.name = name;
+        this.path = path;
+    }
+
+    public Path getPath() {
+        return path;
     }
 
     public long getSize() {
@@ -45,4 +52,8 @@ public class FileProperty {
         return Objects.hash(size, name);
     }
 
+    @Override
+    public String toString() {
+        return "FileProperty{" + "size=" + size + ", name='" + name + '\'' + '}';
+    }
 }
