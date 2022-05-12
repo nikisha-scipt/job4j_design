@@ -40,10 +40,7 @@ public class Zip {
 
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
-            throw new IllegalArgumentException("""
-                    Enter: -d - directory - which we want to archive.
-                    -e - exclude - exclude files with class extension.
-                    -o - output - what we archive into.""");
+            throw new IllegalArgumentException("Enter: -d - directory - which we want to archive. -e - exclude - exclude files with class extension. -o - output - what we archive into.");
         }
         ArgsName argsName = ArgsName.of(args);
         List<String> arrKeys = argsName.get();
@@ -55,11 +52,11 @@ public class Zip {
         List<Path> files = Search.search(Path.of(findValue(arrKeys, "-d")), element -> !element.toFile().getName().endsWith(findValue(arrKeys, "-e")));
         new Zip().packFiles(files, Path.of(findValue(arrKeys, "-o")));
 
-        /*Zip zip = new Zip();
+        /* Zip zip = new Zip();
         zip.packSingleFile(
                 new File("./pom.xml"),
                 new File("./pom.zip")
-        );*/
+        ); */
     }
 
 }
