@@ -1,0 +1,5 @@
+Hello i`m bot. How are you?
+Ok.
+This day is fine:)
+Have you studied Java?
+Bye!

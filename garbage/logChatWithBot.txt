@@ -1,0 +1,18 @@
+hello
+Bot send a message: Hello i`m bot. How are you?
+i`m fine
+Bot send a message: Have you studied Java?
+топ
+Bot send a message: Have you studied Java?
+стоп
+Bot send a message: Have you studied Java?
+hello
+Bot send a message: Bye!
+ok
+Bot send a message: Bye!
+privet
+Bot send a message: Ok.
+good
+Bot send a message: Have you studied Java?
+стоп
+Bot send a message: Hello i`m bot. How are you?
