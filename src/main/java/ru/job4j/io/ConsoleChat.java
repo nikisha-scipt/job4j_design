@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +23,10 @@ public class ConsoleChat {
         List<String> log = new ArrayList<>();
         boolean outOrContinue = false;
         String user = null;
-        while (!STOP.equals(user)) {
+        while (!OUT.equals(user)) {
             user = getString();
             String bot = "Bot send a message: " +  bothPhrases.get((int) (Math.random() * bothPhrases.size()));
-            outOrContinue = outOrContinue ? !CONTINUE.equals(user) : OUT.equals(user);
+            outOrContinue = outOrContinue ? !CONTINUE.equals(user) : STOP.equals(user);
             if (!outOrContinue) {
                 System.out.println(bot);
                 log.add(user);
@@ -38,7 +39,7 @@ public class ConsoleChat {
 
     private List<String> readPhrases() {
         List<String> res = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(botAnswers))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(botAnswers, Charset.forName("UTF-8")))) {
             for (String line = reader.readLine(); line != null; line = reader.readLine()) {
                 res.add(line);
             }
@@ -49,7 +50,7 @@ public class ConsoleChat {
     }
 
     private void saveLog(List<String> log) {
-        try (PrintWriter writer = new PrintWriter(new BufferedOutputStream(new FileOutputStream(path, true)))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(path, Charset.forName("UTF-8"), true))) {
             for (String elem : log) {
                 writer.println(elem);
             }

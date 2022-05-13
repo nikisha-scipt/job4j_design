@@ -16,3 +16,15 @@ good
 Bot send a message: Have you studied Java?
 стоп
 Bot send a message: Hello i`m bot. How are you?
+hello
+Bot send a message: Ok.
+продолжить
+Bot send a message: Ok.
+hello
+Bot send a message: This day is fine:)
+закончить
+Bot send a message: Have you studied Java?
+hello
+Bot send a message: Bye!
+закончить
+Bot send a message: Bye!
