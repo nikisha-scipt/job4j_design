@@ -10,11 +10,14 @@ import java.util.*;
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
     List<FileProperty> filesDupl = new ArrayList<>();
+    List<Path> paths = new ArrayList<>();
+    Map<Path, FileProperty> maps = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        FileProperty fileProperty = new FileProperty(file.toFile().length(), file.toFile().getName(), file.toAbsolutePath());
-        filesDupl.add(fileProperty);
+        FileProperty fileProperty = new FileProperty(file.toFile().length(), file.toFile().getName());
+       filesDupl.add(fileProperty);
+        paths.add(file.toAbsolutePath());
         return super.visitFile(file, attrs);
     }
 
@@ -25,11 +28,12 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
                     continue;
                 }
                 if (filesDupl.get(i).equals(filesDupl.get(j))) {
-                    System.out.printf("Path - %s name file - %s%n", filesDupl.get(i).getPath(), filesDupl.get(i).getName());
+                   maps.put(paths.get(i), filesDupl.get(i));
                     break;
                 }
             }
         }
+        maps.entrySet().forEach(System.out::println);
 
     }
 
