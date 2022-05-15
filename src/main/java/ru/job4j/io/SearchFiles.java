@@ -15,7 +15,7 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 public class SearchFiles implements FileVisitor<Path> {
 
     private final Predicate<Path> condition;
-    List<Path> files;
+    private List<Path> files;
 
     public SearchFiles(Predicate<Path> condition) {
         files = new ArrayList<>();
