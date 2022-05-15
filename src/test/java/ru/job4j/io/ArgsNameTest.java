@@ -26,6 +26,35 @@ public class ArgsNameTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void whenReadEmptyArray() {
+        ArgsName jvm = ArgsName.of(new String[] {""});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenGetNotExistFirstSymbol() {
+        ArgsName jvm = ArgsName.of(new String[] {"Xmx=512"});
+        jvm.get("Xmx");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenGetNotExistEqualsSymbol() {
+        ArgsName jvm = ArgsName.of(new String[] {"-Xmx:512"});
+        jvm.get("Xmx");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenGetNotExistKey() {
+        ArgsName jvm = ArgsName.of(new String[] {"-=512"});
+        jvm.get("Xmx");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenGetNotExistKeyAndValue() {
+        ArgsName jvm = ArgsName.of(new String[] {"-="});
+        jvm.get("Xmx");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void whenGetNotExist() {
         ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512"});
         jvm.get("Xms");
