@@ -32,6 +32,9 @@ public class ArgsName {
     }
 
     public static ArgsName of(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException();
+        }
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
