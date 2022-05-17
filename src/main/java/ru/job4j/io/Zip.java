@@ -11,31 +11,41 @@ public class Zip {
     private static List<Path> files = new ArrayList<>();
 
     public void packFiles(List<Path> sources, Path target) {
+        packSingleFile(sources, target);
+    }
+
+    public void packSingleFile(List<Path> sources, Path target) {
         for (Path file : sources) {
-            packSingleFile(file, target);
-        }
-    }
-
-    public void packSingleFile(Path source, Path target) {
-        try (ZipOutputStream zip = new ZipOutputStream(
-                new BufferedOutputStream(new FileOutputStream(String.valueOf(target))))) {
-            zip.putNextEntry(new ZipEntry(source.toFile().getPath()));
-            try (BufferedInputStream out = new BufferedInputStream(
-                    new FileInputStream(String.valueOf(source))
-            )) {
-                zip.write(out.readAllBytes());
+            try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(String.valueOf(target))))) {
+                zip.putNextEntry(new ZipEntry(file.toFile().getPath()));
+                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(String.valueOf(file)))) {
+                    zip.write(out.readAllBytes());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+    }
+
+    private static void valid(ArgsName args) throws IllegalAccessException {
+        if (!args.get("d").equals("directory")) {
+            throw new IllegalAccessException("Invalid directory");
+        }
+        if (!args.get("e").equals("exclude")) {
+            throw new IllegalAccessException("Invalid exclude");
+        }
+        if (!args.get("o").equals("output")) {
+            throw new IllegalAccessException("Invalid output");
         }
     }
 
 
-    public static void main(String[] args) throws IOException {
-        if (args.length == 0) {
+    public static void main(String[] args) throws IOException, IllegalAccessException {
+        if (args.length != 3) {
             throw new IllegalArgumentException("Enter: -d - directory - which we want to archive. -e - exclude - exclude files with class extension. -o - output - what we archive into.");
         }
         ArgsName argsName = ArgsName.of(args);
+        valid(argsName);
         files = Search.search(Path.of(argsName.get("d")), element -> !element.toFile().getName().endsWith(argsName.get("e")));
         new Zip().packFiles(files, Path.of(argsName.get("o")));
 
