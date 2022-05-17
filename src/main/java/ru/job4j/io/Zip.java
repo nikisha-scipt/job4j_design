@@ -8,8 +8,6 @@ import java.util.zip.ZipOutputStream;
 
 public class Zip {
 
-    private static List<Path> files = new ArrayList<>();
-
     public void packFiles(List<Path> sources, Path target) {
         packSingleFile(sources, target);
     }
@@ -42,11 +40,11 @@ public class Zip {
 
     public static void main(String[] args) throws IOException, IllegalAccessException {
         if (args.length != 3) {
-            throw new IllegalArgumentException("Enter: -d - directory - which we want to archive. -e - exclude - exclude files with class extension. -o - output - what we archive into.");
+            throw new IllegalArgumentException("format: -d=c:\\project -e=.class -o=project.zip");
         }
         ArgsName argsName = ArgsName.of(args);
         valid(argsName);
-        files = Search.search(Path.of(argsName.get("d")), element -> !element.toFile().getName().endsWith(argsName.get("e")));
+        List<Path> files = Search.search(Path.of(argsName.get("d")), element -> !element.toFile().getName().endsWith(argsName.get("e")));
         new Zip().packFiles(files, Path.of(argsName.get("o")));
 
         /* Zip zip = new Zip();

@@ -26,16 +26,12 @@ public class EchoServer {
                         } else if (line.contains("/?msg=Exit")) {
                             any = "Exit";
                             serverSocket.close();
+                            break;
                         } else {
                             any = "What";
                         }
                     }
-                    if (serverSocket.isClosed()) {
-                        out.write("HTTP/1.1 100 Server is closed \r\n\r\n".getBytes(StandardCharsets.UTF_8));
-                    } else {
-                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes(StandardCharsets.UTF_8));
-                        out.write(any.getBytes(StandardCharsets.UTF_8));
-                    }
+                    out.write(any.getBytes(StandardCharsets.UTF_8));
                     out.flush();
                 }
             }
