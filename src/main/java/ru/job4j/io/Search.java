@@ -22,8 +22,8 @@ public class Search {
 
     public static Path valid(String[] arr) {
         Path path;
-        if (arr.length == 0 || arr.length > 2) {
-            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+        if (arr.length != 2) {
+            throw new IllegalArgumentException("Format: C:\\ .jar");
         }
         path = Paths.get(arr[0]);
         if (!path.toFile().exists()) {
