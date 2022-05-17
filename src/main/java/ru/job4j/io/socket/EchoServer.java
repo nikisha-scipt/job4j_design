@@ -31,6 +31,7 @@ public class EchoServer {
                             any = "What";
                         }
                     }
+
                     out.write(any.getBytes(StandardCharsets.UTF_8));
                     out.flush();
                 }
