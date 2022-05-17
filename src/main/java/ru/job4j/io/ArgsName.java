@@ -11,7 +11,7 @@ public class ArgsName {
         if (values.containsKey(key)) {
             return values.get(key);
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("no value for this key ");
     }
 
     private void parse(String[] args) {
@@ -27,13 +27,13 @@ public class ArgsName {
             throw new IllegalArgumentException("format: 'key=value'");
         }
         if (!arr[0].startsWith("-") || arr[0].length() < 2) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("format: -key=value when key length more or equals 2");
         }
     }
 
     public static ArgsName of(String[] args) {
         if (args.length == 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("you passed empty values");
         }
         ArgsName names = new ArgsName();
         names.parse(args);
