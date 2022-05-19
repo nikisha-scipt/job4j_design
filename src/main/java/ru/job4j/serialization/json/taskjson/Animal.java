@@ -1,13 +1,18 @@
 package ru.job4j.serialization.json.taskjson;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
+@XmlRootElement(name = "type")
 public class Animal {
 
     private String type;
 
     public Animal(String type) {
         this.type = type;
+    }
+
+    public Animal() {
     }
 
     @Override

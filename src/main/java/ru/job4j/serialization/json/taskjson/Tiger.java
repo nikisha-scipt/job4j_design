@@ -2,16 +2,23 @@ package ru.job4j.serialization.json.taskjson;
 
 import java.util.Arrays;
 import java.util.Objects;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javax.xml.bind.annotation.*;
 
+@XmlRootElement(name = "tiger")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Tiger {
 
-    private final boolean isFly;
+    @XmlAttribute
+    private boolean isFly;
+    @XmlAttribute
     private int age;
-    private final String name;
-    private final Animal type;
+    private String name;
+    private Animal type;
+
+    @XmlElementWrapper(name = "location")
+    @XmlElement(name = "loc")
     private String[] location;
 
     public Tiger(boolean isFly, int age, String name, Animal type, String[] location) {
@@ -20,6 +27,9 @@ public class Tiger {
         this.name = name;
         this.type = type;
         this.location = location;
+    }
+
+    public Tiger() {
     }
 
     @Override
