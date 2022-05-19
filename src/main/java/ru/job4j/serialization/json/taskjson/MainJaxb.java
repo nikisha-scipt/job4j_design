@@ -1,7 +1,5 @@
 package ru.job4j.serialization.json.taskjson;
 
-import ru.job4j.serialization.xml.Person;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;

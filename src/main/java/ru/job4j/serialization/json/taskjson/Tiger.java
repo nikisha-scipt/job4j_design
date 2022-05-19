@@ -56,7 +56,7 @@ public class Tiger {
         return "Tiger{" + "isFly=" + isFly + ", age=" + age + ", name='" + name + '\'' + ", type=" + type + ", location=" + Arrays.toString(location) + '}';
     }
 
-    public static void main(String[] args) {
+    public void jsonCreate() {
         final Tiger tiger = new Tiger(false, 5, "lion", new Animal("Cat"), new String[] {"Bangladesh", "Vietnam", "India"});
 
         final Gson gson = new GsonBuilder().create();
@@ -68,4 +68,5 @@ public class Tiger {
             System.out.println(tigerTemp);
         }
     }
+
 }
