@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<tiger isFly="false" age="5" name="lion">
+    <animal type="Cat"/>
+    <location>
+        <loc>Bangladesh</loc>
+        <loc>Vietnam</loc>
+        <loc>India</loc>
+    </location>
+</tiger>
