@@ -27,15 +27,6 @@ public class UsageLog4j {
         } catch (Exception e) {
             LOG.error("Exception in log example", e);
         }
-        // Неправильные логгеры!
-        /*catch (Exception e) {
-            LOG.error(e.getMessage());
-        } catch (Exception e) {
-            LOG.error("Error {}, User {}", e, "Petr");
-        } catch (Exception e) {
-            LOG.error("Error", e);
-            throw e;
-        }*/
 
     }
 
