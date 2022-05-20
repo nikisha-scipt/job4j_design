@@ -8,7 +8,7 @@ public class SimpleTreeTest {
 
     @Test
     public void when6ElFindLastThen6() {
-        Tree<Integer> tree = new SimpleTree<>(1);
+        ru.job4j.tree.Tree<Integer> tree = new ru.job4j.tree.SimpleTree<>(1);
         tree.add(1, 2);
         tree.add(1, 3);
         tree.add(1, 4);
@@ -22,7 +22,7 @@ public class SimpleTreeTest {
 
     @Test
     public void when6ElFindNotExitThenOptionEmpty() {
-        Tree<Integer> tree = new SimpleTree<>(1);
+        ru.job4j.tree.Tree<Integer> tree = new ru.job4j.tree.SimpleTree<>(1);
         tree.add(1, 2);
         assertThat(
                 tree.findBy(7).isPresent(),
@@ -32,7 +32,7 @@ public class SimpleTreeTest {
 
     @Test
     public void whenChildExistOnLeafThenNotAdd() {
-        Tree<Integer> tree = new SimpleTree<>(1);
+        ru.job4j.tree.Tree<Integer> tree = new ru.job4j.tree.SimpleTree<>(1);
         tree.add(1, 2);
         tree.add(1, 3);
         tree.add(1, 4);
@@ -43,7 +43,7 @@ public class SimpleTreeTest {
 
     @Test
     public void whenTreeIsBinary() {
-        Tree<Integer> tree = new SimpleTree<>(1);
+        ru.job4j.tree.Tree<Integer> tree = new ru.job4j.tree.SimpleTree<>(1);
         tree.add(1, 2);
         tree.add(1, 3);
         tree.add(3, 4);
@@ -54,7 +54,7 @@ public class SimpleTreeTest {
 
     @Test
     public void whenTreeIsNotBinary() {
-        Tree<Integer> tree = new SimpleTree<>(1);
+        ru.job4j.tree.Tree<Integer> tree = new ru.job4j.tree.SimpleTree<>(1);
         tree.add(1, 2);
         tree.add(1, 3);
         tree.add(1, 4);

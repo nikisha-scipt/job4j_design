@@ -100,5 +100,6 @@ public class SimpleStack<E> implements MyStack<E> {
         Iterator<Integer> it = sm.iterator();
         System.out.println(it.next());
         System.out.println(it.next());
+
     }
 }

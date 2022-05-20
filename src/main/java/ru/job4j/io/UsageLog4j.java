@@ -22,6 +22,21 @@ public class UsageLog4j {
         boolean eight = true;
         LOG.debug("byte: {}, short: {}, int: {}, long: {}, float: {}, double: {}, char: {}, boolean: {}", one, two, three, four, five, six, seven, eight);
 
+        try {
+            throw new Exception("Not supported code");
+        } catch (Exception e) {
+            LOG.error("Exception in log example", e);
+        }
+        // Неправильные логгеры!
+        /*catch (Exception e) {
+            LOG.error(e.getMessage());
+        } catch (Exception e) {
+            LOG.error("Error {}, User {}", e, "Petr");
+        } catch (Exception e) {
+            LOG.error("Error", e);
+            throw e;
+        }*/
+
     }
 
 }

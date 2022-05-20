@@ -28,3 +28,11 @@ hello
 Bot send a message: Bye!
 закончить
 Bot send a message: Bye!
+hi
+Bot send a message: Bye!
+продолжить
+Bot send a message: Hello i`m bot. How are you?
+руддщ
+Bot send a message: Have you studied Java?
+закончить
+Bot send a message: Have you studied Java?
