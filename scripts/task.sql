@@ -7,7 +7,12 @@ create table employee (
 	salary real not null,
 	dateOfBirth date not null
 );
-insert into employee (name, surname, city, age, salary, dateOfBirth) values ('Danil', 'Nikishin','Moscow', '26', '1111.2', '1996-01-11');
-update employee set name = 'Andrey', surname = 'Fedorov', age = '30', salary = '11111.2', dateOfBirth = '2000-01-01';
+
+insert into employee
+(name, surname, city, age, salary, dateOfBirth)
+values ('Danil', 'Nikishin','Moscow', '26', '1111.2', '1996-01-11');
+
+update employee set
+name = 'Andrey', surname = 'Fedorov', age = '30', salary = '11111.2', dateOfBirth = '2000-01-01';
 
 delete from employee;
