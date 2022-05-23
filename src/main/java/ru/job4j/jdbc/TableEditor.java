@@ -80,6 +80,9 @@ public class TableEditor implements AutoCloseable {
         if (connection != null) {
             connection.close();
         }
+        if (statement != null) {
+            statement.close();
+        }
     }
 
     public static void main(String[] args) throws Exception {
