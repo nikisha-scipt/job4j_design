@@ -13,6 +13,7 @@ insert into departments (name) values ('dep1'), ('dep2'), ('dep3');
 insert into employees (name,id_dep) values ('Danil', 1), ('Anastasiya', 2),
 ('Andry', 3), ('Sergey', null), ('Maria', null);
 
+2)
 select * from employees as e
 left outer join departments as d
 on e.id_dep = d.id;
@@ -28,9 +29,13 @@ on e.id_dep = d.id;
 select * from employees as e
 cross join departments as d;
 
-select * from employees as e
-left outer join departments d
-on e.id_dep = d.id where e.id_dep is null;
+3)
+select d.name
+from departments as d
+left outer join employees as e
+on d.id = e.id_dep
+where e.id_dep is null
+group by d.name;
 
 4)
 select * from departments as d
@@ -50,5 +55,5 @@ create table teens (
 	gender char(1)
 );
 insert into teens(name, gender) values ('junior', 'm'), ('middle', 'w'), ('senior', 'w');
-select m1.gender as a, m2.gender as b, (m1.gender != m2.gender) as "a&b=" from teens m1 cross join teens m2;
+select * from teens t1 cross join teens t2 where t1.gender != t2.gender;
 
