@@ -17,9 +17,9 @@ create table engines (
 create table cars (
 	id serial primary key,
 	name varchar(30),
-	id_body int references bodies(id) unique,
-	id_transmission int references transmissions(id) unique,
-	id_engine int references engines(id) unique
+	id_body int references bodies(id),
+	id_transmission int references transmissions(id),
+	id_engine int references engines(id)
 );
 
 insert into bodies(color) values ('black'), ('green'), ('orange');
@@ -39,19 +39,11 @@ on c.id_engine = e.id
 group by c.name,b.color,t.type,e.name,e.power;
 
 2)
-select b.color from cars as c
-left outer join bodies as b
-on c.id_body = b.id
-where c.id is null;
-
-select t.type from cars as c
-left outer join transmissions as t
-on c.id_body = t.id
-where c.id is null;
-
-select e.name from cars as c
-left outer join engines as e
-on c.id_body = e.id
-where c.id is null;
+select c.name as car, b.color as colorofbody, t.type as type, e.name as nameofengine
+from cars as c
+left join bodies as b on c.id_body != b.id
+left join transmissions as t on c.id_transmission != t.id
+left join engines as e on c.id_engine != e.id
+group by c.name, b.color, t.type, e.name;
 
 
