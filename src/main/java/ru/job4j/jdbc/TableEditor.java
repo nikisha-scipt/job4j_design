@@ -1,11 +1,8 @@
 package ru.job4j.jdbc;
 
-import ru.job4j.io.Config;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
 
@@ -13,20 +10,17 @@ public class TableEditor implements AutoCloseable {
 
     private Connection connection;
     private Properties properties;
-    private Config config;
     private Statement statement;
 
-    public TableEditor(Properties properties, String path) throws SQLException {
+    public TableEditor(Properties properties) throws SQLException {
         this.properties = properties;
-        this.config = new Config(path);
-        this.config.load();
         initConnection();
     }
 
     private void initConnection() throws SQLException {
-        String url = config.value("hibernate.connection.url");
-        String login = config.value("hibernate.connection.username");
-        String pass = config.value("hibernate.connection.password");
+        String url = properties.getProperty("hibernate.connection.url");
+        String login = properties.getProperty("hibernate.connection.username");
+        String pass = properties.getProperty("hibernate.connection.password");
         connection = DriverManager.getConnection(url, login, pass);
         this.statement = connection.createStatement();
     }
@@ -86,7 +80,13 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws Exception {
-        TableEditor tableEditor = new TableEditor(new Properties(), "./data/app.properties");
+        Properties config = new Properties();
+        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
+            config.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        TableEditor tableEditor = new TableEditor(config);
         tableEditor.createTable("temp_demo");
         tableEditor.addColumn("temp_demo", "id", "serial primary key");
         tableEditor.addColumn("temp_demo", "name", "text");
@@ -96,6 +96,5 @@ public class TableEditor implements AutoCloseable {
         tableEditor.dropColumn("temp_demo", "newName");
         System.out.println(tableEditor.getTableScheme("temp_demo"));
         tableEditor.dropTable("temp_demo");
-        tableEditor.close();
     }
 }
