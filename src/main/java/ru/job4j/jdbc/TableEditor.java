@@ -86,16 +86,19 @@ public class TableEditor implements AutoCloseable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        TableEditor tableEditor = new TableEditor(config);
-        tableEditor.createTable("temp_demo");
-        tableEditor.addColumn("temp_demo", "id", "serial primary key");
-        tableEditor.addColumn("temp_demo", "name", "text");
-        System.out.println(tableEditor.getTableScheme("temp_demo"));
-        tableEditor.renameColumn("temp_demo", "name", "newName");
-        System.out.println(tableEditor.getTableScheme("temp_demo"));
-        tableEditor.dropColumn("temp_demo", "newName");
-        System.out.println(tableEditor.getTableScheme("temp_demo"));
-        tableEditor.dropTable("temp_demo");
+        try (TableEditor tableEditor = new TableEditor(config)) {
+            tableEditor.createTable("temp_demo");
+            tableEditor.addColumn("temp_demo", "id", "serial primary key");
+            tableEditor.addColumn("temp_demo", "name", "text");
+            System.out.println(tableEditor.getTableScheme("temp_demo"));
+            tableEditor.renameColumn("temp_demo", "name", "newName");
+            System.out.println(tableEditor.getTableScheme("temp_demo"));
+            tableEditor.dropColumn("temp_demo", "newName");
+            System.out.println(tableEditor.getTableScheme("temp_demo"));
+            tableEditor.dropTable("temp_demo");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }
