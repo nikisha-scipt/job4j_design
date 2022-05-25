@@ -41,11 +41,18 @@ public class ImportDB {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
              rd.lines().forEach(elem -> {
-                 String[] temp = elem.split(";");
+                 String[] temp = elem.split(";", 2);
+                 valid(temp);
                  users.add(new User(temp[0], temp[1]));
              });
         }
         return users;
+    }
+
+    private void valid(String[] arr) {
+        if (arr.length != 2 || arr[0].isEmpty() || arr[1].isEmpty()) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public void save(List<User> users) throws ClassNotFoundException, SQLException {
