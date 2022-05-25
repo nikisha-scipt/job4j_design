@@ -98,6 +98,7 @@ public class TableEditor implements AutoCloseable {
             tableEditor.dropTable("temp_demo");
         } catch (SQLException e) {
             e.printStackTrace();
+
         }
 
     }
