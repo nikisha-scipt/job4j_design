@@ -39,11 +39,19 @@ on c.id_engine = e.id
 group by c.name,b.color,t.type,e.name,e.power;
 
 2)
-select c.name as car, b.color as colorofbody, t.type as type, e.name as nameofengine
-from cars as c
-left join bodies as b on c.id_body != b.id
-left join transmissions as t on c.id_transmission != t.id
-left join engines as e on c.id_engine != e.id
-group by c.name, b.color, t.type, e.name;
+select b.color from bodies as b
+left outer join cars as c
+on b.id = c.id_body
+where c.id_body is null;
+
+select t.type from transmissions as t
+left outer join cars as c
+on t.id = c.id_transmission
+where c.id is null;
+
+select e.name from engines as e
+left outer join cars as c
+on c.id_engine = e.id
+where c.id is null;
 
 
