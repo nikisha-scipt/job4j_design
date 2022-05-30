@@ -39,7 +39,15 @@ select c.name, count(p.company_id) from person as p
 left outer join company as c
 on c.id = p.company_id
 group by c.name, p.company_id
-having max(p.company_id) < count(p.company_id);
+having max(p.company_id) = count(p.company_id);
+
+c)
+select c.name, count(p.company_id) from person as p
+left outer join company as c
+on c.id = p.company_id
+group by c.name, p.company_id
+order by p.company_id asc
+limit 2;
 
 
 
