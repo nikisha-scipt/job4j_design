@@ -49,5 +49,13 @@ group by c.name, p.company_id
 order by p.company_id asc
 limit 2;
 
+g)
+select c.name as nameofcompany, count(p.company_id) as cnt
+from company as c
+inner join person as p
+on c.id != p.company_id
+group by c.name, p.company_id, c.id
+having count(c.name) = (select max(p.company_id) where c.id != p.company_id);
+
 
 
