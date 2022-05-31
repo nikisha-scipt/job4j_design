@@ -71,10 +71,10 @@ select c.name, count(*) from person as p
 inner join company as c
 on c.id = p.company_id
 group by c.name
-having count(*) = (select pp.company_id from  person as pp
-							 group by pp.id
-							 order by pp.id desc
-							 limit 1);
+having count(*) = (select count(*) from  person as pp
+							group by pp.company_id
+							order by count(*) desc
+							limit 1);
 
 
 
