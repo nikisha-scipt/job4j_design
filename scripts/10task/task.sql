@@ -67,11 +67,11 @@ group by p.name, c.name, p.company_id
 having p.company_id!= 5;
 
 2)
-select c.name, count(p.company_id) from person as p
+select c.name, count(*) from person as p
 inner join company as c
 on c.id = p.company_id
 group by c.name
-having count(p.company_id) = (select max(pp.company_id) from person as pp
+having count(*) = (select pp.company_id from  person as pp
 							 group by pp.id
 							 order by pp.id desc
 							 limit 1);
