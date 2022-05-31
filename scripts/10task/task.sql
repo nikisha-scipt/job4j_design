@@ -17,7 +17,7 @@ a)
 select p.name from person as p
 left outer join company as c
 on c.id = p.company_id
-where c.id != 5;
+where p.company_id != 5;
 
 b)
 select c.name as nameofcompany, p.name as nameofperson from company as c
@@ -56,6 +56,26 @@ inner join person as p
 on c.id != p.company_id
 group by c.name, p.company_id, c.id
 having count(c.name) = (select max(p.company_id) where c.id != p.company_id);
+
+
+reload:
+1)
+select c.name, p.name from person as p
+inner join company as c
+on c.id = p.company_id
+group by p.name, c.name, c.id
+having c.id != 5;
+
+2)
+select c.name, count(p.company_id) from person as p
+inner join company as c
+on c.id = p.company_id
+group by c.name
+having count(p.company_id) = (select max(pp.company_id) from person as pp
+							 group by pp.id
+							 order by pp.id desc
+							 limit 1);
+
 
 
 
