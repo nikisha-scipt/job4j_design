@@ -63,8 +63,8 @@ reload:
 select c.name, p.name from person as p
 inner join company as c
 on c.id = p.company_id
-group by p.name, c.name, c.id
-having c.id != 5;
+group by p.name, c.name, p.company_id
+having p.company_id!= 1;
 
 2)
 select c.name, count(p.company_id) from person as p
