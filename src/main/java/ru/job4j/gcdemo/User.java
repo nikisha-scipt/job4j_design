@@ -80,7 +80,6 @@ public class User {
                 new User(names[(int) (Math.random() * names.length)], (int) (Math.random() * 100));
             }
         }
-        System.gc();
         info();
     }
 }
