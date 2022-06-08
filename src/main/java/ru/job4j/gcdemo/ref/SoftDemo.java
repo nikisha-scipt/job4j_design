@@ -3,18 +3,26 @@ package ru.job4j.gcdemo.ref;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SoftDemo {
 
     public static void main(String[] args) throws InterruptedException {
-       // example1();
+        example1();
         example2();
     }
 
     private static void example1() throws InterruptedException {
-        Object strong = new Object();
+        Object strong = new Object() {
+            @Override
+            protected void finalize() throws Throwable {
+                System.out.println("Removed");
+            }
+        };
         SoftReference<Object> softReference = new SoftReference<>(strong);
         strong = null;
+        System.gc();
+        TimeUnit.SECONDS.sleep(5);
         System.out.println(softReference.get());
 
     }
