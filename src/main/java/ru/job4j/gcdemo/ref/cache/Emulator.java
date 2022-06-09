@@ -1,11 +1,10 @@
 package ru.job4j.gcdemo.ref.cache;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Emulator {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Укажите кэшируемую директорию: ");
         String path = scanner.nextLine();
@@ -17,6 +16,7 @@ public class Emulator {
         if ("yes".equals(answer)) {
             dirFileCache.put(file, dirFileCache.load(file));
             System.out.println(dirFileCache.get(file));
+
         } else {
            System.out.println("wrong answer");
         }
