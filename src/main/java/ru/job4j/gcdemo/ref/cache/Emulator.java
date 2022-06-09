@@ -14,15 +14,12 @@ public class Emulator {
         String file = scanner.nextLine();
         System.out.print("Загрузить и получить содержимое файла в кэш? ");
         String answer = scanner.nextLine();
-        switch (answer) {
-            case "да" -> {
-                dirFileCache.put(file, dirFileCache.load(file));
-                System.out.println(dirFileCache.get(file));
-            }
-            case "нет" -> System.out.println("bye");
-            default -> System.out.println("wrong answer");
+        if ("yes".equals(answer)) {
+            dirFileCache.put(file, dirFileCache.load(file));
+            System.out.println(dirFileCache.get(file));
+        } else {
+           System.out.println("wrong answer");
         }
-
     }
 
 }
