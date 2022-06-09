@@ -40,7 +40,7 @@ public class CinemaTest {
     }
 
     @Ignore
-    @Test()
+    @Test(expected = IllegalArgumentException.class)
     public void whenBuyTicketToSamePlace() {
         Account account = new AccountCinema();
         Cinema cinema = new Cinema3D();
@@ -51,12 +51,32 @@ public class CinemaTest {
     }
 
     @Ignore
-    @Test()
+    @Test(expected = IllegalArgumentException.class)
     public void whenAddTheSameSession() {
         Session session = new Session3D();
         List<Session> sessions = new ArrayList<>();
         sessions.add(session);
         sessions.add(session);
+    }
+
+    @Ignore
+    @Test(expected = IllegalArgumentException.class)
+    public void whenNotValidDate() {
+        Account account = new AccountCinema();
+        Cinema cinema = new Cinema3D();
+        Calendar date = Calendar.getInstance();
+        date.roll(10, -1);
+        cinema.buy(account, 1, 1, date);
+    }
+
+    @Ignore
+    @Test(expected = IllegalArgumentException.class)
+    public void whenNotValidPlace() {
+        Account account = new AccountCinema();
+        Cinema cinema = new Cinema3D();
+        Calendar date = Calendar.getInstance();
+        date.set(2020, 11, 10, 23, 0);
+        Ticket ticket = cinema.buy(account, -1, -1, date);
     }
 
 }
