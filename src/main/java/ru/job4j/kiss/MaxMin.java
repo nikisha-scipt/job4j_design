@@ -6,23 +6,21 @@ import java.util.List;
 public class MaxMin {
 
     public <T> T max(List<T> value, Comparator<T> comparator) {
-        T res = value.get(0);
-        for (int i = 1; i < value.size(); i++) {
-            if (comparator.compare(res, value.get(i)) > 0) {
-                res = value.get(i);
-            }
-        }
-        return res;
+        return kissMethod(value, comparator);
     }
 
     public <T> T min(List<T> value, Comparator<T> comparator) {
-        T res = value.get(0);
-        for (int i = 1; i < value.size(); i++) {
-            if (comparator.compare(res, value.get(i)) < 0) {
-                res = value.get(i);
+        return kissMethod(value, comparator.reversed());
+    }
+
+    private <T> T kissMethod(List<T> value, Comparator<T> comparator) {
+        T result = value.get(0);
+        for (T elem : value) {
+            if (comparator.compare(result, elem) < 0) {
+                result = elem;
             }
         }
-        return res;
+        return result;
     }
 
 
