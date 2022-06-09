@@ -18,13 +18,12 @@ public class MyExample {
         user = null;
         System.gc();
         TimeUnit.SECONDS.sleep(5);
-        User us = null;
-        if (softUser.get() == null) {
+        User us = softUser.get();
+        if (us == null) {
             System.out.println("User is removed");
         } else {
-            us = softUser.get();
+            System.out.println(us);
         }
-        System.out.println(us);
 
     }
 
