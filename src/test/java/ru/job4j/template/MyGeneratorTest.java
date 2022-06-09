@@ -47,7 +47,19 @@ public class MyGeneratorTest {
         Generator generator = new MyGenerator();
         String result = generator.produce(template, map);
         String expected = "Hello, my name is Danil. I am 26 years old.I live in Moscow";
-        assertThat(result, is(expected));
+    }
+
+    @Ignore
+    @Test(expected = IllegalArgumentException.class)
+    public void whenKeyNotSame() {
+        String template = "Hello, my name is ${name}. I am ${age} years old. I live in ${town}.";
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "Danil");
+        map.put("TEST", "26");
+        map.put("town", "Moscow");
+        Generator generator = new MyGenerator();
+        String result = generator.produce(template, map);
+        String expected = "Hello, my name is Danil. I am 26 years old.I live in Moscow";
     }
 
 }
