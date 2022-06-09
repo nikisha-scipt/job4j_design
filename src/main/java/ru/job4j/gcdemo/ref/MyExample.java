@@ -12,15 +12,19 @@ public class MyExample {
         exampleSoft();
     }
 
-    private static void exampleSoft() {
+    private static void exampleSoft() throws InterruptedException {
         User user = new User("Test", 20);
         SoftReference<User> softUser = new SoftReference<>(user);
         user = null;
+        System.gc();
+        TimeUnit.SECONDS.sleep(5);
+        User us = null;
         if (softUser.get() == null) {
             System.out.println("User is removed");
         } else {
-            System.out.println(softUser.get());
+            us = softUser.get();
         }
+        System.out.println(us);
 
     }
 
