@@ -20,7 +20,7 @@ public class Emulator {
                 System.out.println(dirFileCache.get(file));
             }
             case "нет" -> System.out.println("bye");
-            default -> System.out.println("Введите одно из значений: да или нет");
+            default -> System.out.println("wrong answer");
         }
 
     }
