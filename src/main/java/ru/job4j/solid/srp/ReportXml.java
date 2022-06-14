@@ -26,6 +26,7 @@ public class ReportXml implements Report {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             xml = "";
+
             try (StringWriter writer = new StringWriter()) {
                 marshaller.marshal(new EmpList(employeeList), writer);
                 xml = writer.getBuffer().toString();
