@@ -1,9 +1,16 @@
 package ru.job4j.srp;
 
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.Matchers.is;
 import org.junit.Test;
+import ru.job4j.solid.srp.*;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class ReportEngineTest {
 
@@ -77,6 +84,68 @@ public class ReportEngineTest {
                 + worker1.getSalary() + ";"
                 + System.lineSeparator();
         assertThat(hr.generate(em -> true), is(expect));
+    }
+
+    @Test
+    public void whenJsonReport() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker1 = new Employee("Ivan", now, now, 100);
+        store.add(worker1);
+        Report hr = new ReportJson(store);
+        String expect = "[{\"name\":\""
+                + worker1.getName()
+                + "\",\""
+                + "hired\":{\"year\":"
+                + now.get(Calendar.YEAR)
+                + ",\"month\":"
+                + now.get(Calendar.MONTH)
+                + ",\"dayOfMonth\":"
+                + now.get(Calendar.DAY_OF_MONTH)
+                + ",\"hourOfDay\":"
+                + now.get(Calendar.HOUR_OF_DAY)
+                + ",\"minute\":"
+                + now.get(Calendar.MINUTE)
+                + ",\"second\":"
+                + now.get(Calendar.SECOND)
+                + "},\"fired\":"
+                + "{\"year\":"
+                + now.get(Calendar.YEAR)
+                + ",\"month\":"
+                + now.get(Calendar.MONTH)
+                + ",\"dayOfMonth\":"
+                + now.get(Calendar.DAY_OF_MONTH)
+                + ",\"hourOfDay\":"
+                + now.get(Calendar.HOUR_OF_DAY)
+                + ",\"minute\":"
+                + now.get(Calendar.MINUTE)
+                + ",\"second\":"
+                + now.get(Calendar.SECOND)
+                + "},\"salary\":"
+                + worker1.getSalary() + "}]";
+        assertThat(hr.generate(em -> true), is(expect));
+    }
+
+    @Test
+    public void whenXmlReport() throws DatatypeConfigurationException {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Danil", now, now, 100);
+        store.add(worker);
+        Report generator = new ReportXml(store);
+        XMLGregorianCalendar date = DatatypeFactory
+                .newInstance()
+                .newXMLGregorianCalendar((GregorianCalendar) now);
+        String except = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                + "<empList>\n"
+                + "    <empList>\n"
+                + "        <fired>" + date + "</fired>\n"
+                + "        <hired>" + date + "</hired>\n"
+                + "        <name>" + worker.getName() + "</name>\n"
+                + "        <salary>" + worker.getSalary() + "</salary>\n"
+                + "    </empList>\n"
+                + "</empList>\n";
+        assertThat(generator.generate(em -> true), is(except));
     }
 
 }
