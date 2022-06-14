@@ -1,4 +1,4 @@
-package ru.job4j.srp;
+package ru.job4j.solid.srp;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -66,4 +66,8 @@ public class Employee {
         return Objects.hash(name);
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" + "name='" + name + '\'' + ", hired=" + hired + ", fired=" + fired + ", salary=" + salary + '}';
+    }
 }

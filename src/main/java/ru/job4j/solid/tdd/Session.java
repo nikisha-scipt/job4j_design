@@ -1,4 +1,4 @@
-package ru.job4j.tdd;
+package ru.job4j.solid.tdd;
 
 public interface Session {
 }
