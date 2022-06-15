@@ -16,6 +16,7 @@ public class ReportSalary implements Report {
     public String generate(Predicate<Employee> filter) {
         StringBuilder res = new StringBuilder();
         res.append("Name; Hired; Fired; Salary;");
+        res.append(System.lineSeparator());
         store.findBy(filter).forEach(emp -> {
             double resSal = newSalary(emp);
             emp.setSalary(resSal);
