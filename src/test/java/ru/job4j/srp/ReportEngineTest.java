@@ -8,6 +8,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -136,30 +137,6 @@ public class ReportEngineTest {
         assertThat(hr.generate(em -> true), is(expect.toString()));
     }
 
-    @Test
-    @Ignore
-    public void whenXmlReportSb() throws DatatypeConfigurationException {
-        MemStore store = new MemStore();
-        Calendar now = Calendar.getInstance();
-        Employee worker = new Employee("Danil", now, now, 100);
-        store.add(worker);
-        Report generator = new ReportXml(store);
-        XMLGregorianCalendar date = DatatypeFactory
-                .newInstance()
-                .newXMLGregorianCalendar((GregorianCalendar) now);
-        StringBuilder expect = new StringBuilder()
-                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>").append(System.lineSeparator())
-                .append("<empList>").append(System.lineSeparator())
-                .append("    <empList>").append(System.lineSeparator())
-                .append("        <fired>").append(date).append("</fired>").append(System.lineSeparator())
-                .append("        <hired>").append(date).append("</hired>").append(System.lineSeparator())
-                .append("        <name>").append(worker.getName()).append("</name>").append(System.lineSeparator())
-                .append("        <salary>").append(worker.getSalary()).append("</salary>").append(System.lineSeparator())
-                .append("    </empList>").append(System.lineSeparator())
-                .append("</empList>").append(System.lineSeparator());
-
-        assertThat(generator.generate(em -> true), is(expect.toString()));
-    }
 
     @Test
     public void whenXmlReportString() throws DatatypeConfigurationException {
@@ -171,7 +148,7 @@ public class ReportEngineTest {
         XMLGregorianCalendar date = DatatypeFactory
                 .newInstance()
                 .newXMLGregorianCalendar((GregorianCalendar) now);
-        String except = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+        String expect = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                 + "<empList>\n"
                 + "    <empList>\n"
                 + "        <fired>" + date + "</fired>\n"
@@ -180,7 +157,7 @@ public class ReportEngineTest {
                 + "        <salary>" + worker.getSalary() + "</salary>\n"
                 + "    </empList>\n"
                 + "</empList>\n";
-        assertThat(generator.generate(em -> true), is(except));
+        assertThat(generator.generate(em -> true), is(expect));
     }
 
 }
