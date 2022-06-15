@@ -3,6 +3,7 @@ package ru.job4j.list;
 import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.collections.list.SimpleLinkedList;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

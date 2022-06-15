@@ -1,6 +1,8 @@
 package ru.job4j.set;
 
 import org.junit.Test;
+import ru.job4j.collections.set.SimpleSet;
+
 import static org.junit.Assert.*;
 
 public class SimpleSetTest {

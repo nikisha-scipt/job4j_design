@@ -2,6 +2,7 @@ package ru.job4j.map;
 
 import org.hamcrest.core.Is;
 import org.junit.Test;
+import ru.job4j.collections.map.SimpleMap;
 
 import java.util.Iterator;
 

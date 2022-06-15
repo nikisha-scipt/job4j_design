@@ -2,6 +2,8 @@ package ru.job4j.list;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.collections.list.MyStack;
+import ru.job4j.collections.list.SimpleStack;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;

@@ -2,6 +2,8 @@ package ru.job4j.template;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import ru.job4j.solid.template.Generator;
+import ru.job4j.solid.template.MyGenerator;
 
 import java.util.HashMap;
 import java.util.Map;

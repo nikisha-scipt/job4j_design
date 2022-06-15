@@ -1,6 +1,9 @@
 package ru.job4j.tree;
 
 import org.junit.Test;
+import ru.job4j.collections.tree.SimpleTree;
+import ru.job4j.collections.tree.Tree;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -8,7 +11,7 @@ public class SimpleTreeTest {
 
     @Test
     public void when6ElFindLastThen6() {
-        ru.job4j.tree.Tree<Integer> tree = new ru.job4j.tree.SimpleTree<>(1);
+        Tree<Integer> tree = new SimpleTree<>(1);
         tree.add(1, 2);
         tree.add(1, 3);
         tree.add(1, 4);
@@ -22,7 +25,7 @@ public class SimpleTreeTest {
 
     @Test
     public void when6ElFindNotExitThenOptionEmpty() {
-        ru.job4j.tree.Tree<Integer> tree = new ru.job4j.tree.SimpleTree<>(1);
+        Tree<Integer> tree = new SimpleTree<>(1);
         tree.add(1, 2);
         assertThat(
                 tree.findBy(7).isPresent(),
@@ -32,7 +35,7 @@ public class SimpleTreeTest {
 
     @Test
     public void whenChildExistOnLeafThenNotAdd() {
-        ru.job4j.tree.Tree<Integer> tree = new ru.job4j.tree.SimpleTree<>(1);
+        Tree<Integer> tree = new SimpleTree<>(1);
         tree.add(1, 2);
         tree.add(1, 3);
         tree.add(1, 4);
@@ -43,7 +46,7 @@ public class SimpleTreeTest {
 
     @Test
     public void whenTreeIsBinary() {
-        ru.job4j.tree.Tree<Integer> tree = new ru.job4j.tree.SimpleTree<>(1);
+        Tree<Integer> tree = new SimpleTree<>(1);
         tree.add(1, 2);
         tree.add(1, 3);
         tree.add(3, 4);
@@ -54,7 +57,7 @@ public class SimpleTreeTest {
 
     @Test
     public void whenTreeIsNotBinary() {
-        ru.job4j.tree.Tree<Integer> tree = new ru.job4j.tree.SimpleTree<>(1);
+        Tree<Integer> tree = new SimpleTree<>(1);
         tree.add(1, 2);
         tree.add(1, 3);
         tree.add(1, 4);

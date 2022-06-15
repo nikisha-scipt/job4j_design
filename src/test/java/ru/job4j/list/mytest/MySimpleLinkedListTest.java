@@ -2,10 +2,12 @@ package ru.job4j.list.mytest;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.collections.list.mytest.MySimpleLinkedList;
+import ru.job4j.collections.list.mytest.MyTestLinkedList;
 
 public class MySimpleLinkedListTest {
 
-    private ru.job4j.list.mytest.MyTestLinkedList<Integer> list;
+    private MyTestLinkedList<Integer> list;
 
     @Before
     public void createList() {

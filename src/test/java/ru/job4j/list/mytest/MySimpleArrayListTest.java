@@ -3,6 +3,7 @@ package ru.job4j.list.mytest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.collections.list.mytest.MySimpleArrayList;
 
 public class MySimpleArrayListTest {
 

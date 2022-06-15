@@ -2,6 +2,7 @@ package ru.job4j.kiss;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.solid.kiss.MaxMin;
 
 import java.util.Comparator;
 import java.util.List;

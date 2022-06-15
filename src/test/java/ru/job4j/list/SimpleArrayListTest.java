@@ -3,6 +3,8 @@ package ru.job4j.list;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.collections.list.MyList;
+import ru.job4j.collections.list.SimpleArrayList;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
