@@ -1,5 +1,6 @@
 package ru.job4j.srp;
 
+import org.junit.Ignore;
 import ru.job4j.solid.srp.*;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -106,41 +107,62 @@ public class ReportEngineTest {
         Employee worker1 = new Employee("Ivan", now, now, 100);
         store.add(worker1);
         Report hr = new ReportJson(store);
-        String expect = "[{\"name\":\""
-                + worker1.getName()
-                + "\",\""
-                + "hired\":{\"year\":"
-                + now.get(Calendar.YEAR)
-                + ",\"month\":"
-                + now.get(Calendar.MONTH)
-                + ",\"dayOfMonth\":"
-                + now.get(Calendar.DAY_OF_MONTH)
-                + ",\"hourOfDay\":"
-                + now.get(Calendar.HOUR_OF_DAY)
-                + ",\"minute\":"
-                + now.get(Calendar.MINUTE)
-                + ",\"second\":"
-                + now.get(Calendar.SECOND)
-                + "},\"fired\":"
-                + "{\"year\":"
-                + now.get(Calendar.YEAR)
-                + ",\"month\":"
-                + now.get(Calendar.MONTH)
-                + ",\"dayOfMonth\":"
-                + now.get(Calendar.DAY_OF_MONTH)
-                + ",\"hourOfDay\":"
-                + now.get(Calendar.HOUR_OF_DAY)
-                + ",\"minute\":"
-                + now.get(Calendar.MINUTE)
-                + ",\"second\":"
-                + now.get(Calendar.SECOND)
-                + "},\"salary\":"
-                + worker1.getSalary() + "}]";
-        assertThat(hr.generate(em -> true), is(expect));
+        StringBuilder expect = new StringBuilder()
+                .append("[{\"name\":\"").append(worker1.getName())
+                .append("\",\"").append("hired\":{\"year\":")
+                .append(now.get(Calendar.YEAR)).append(",\"month\":")
+                .append(now.get(Calendar.MONTH)).append(",\"dayOfMonth\":")
+                .append(now.get(Calendar.DAY_OF_MONTH))
+                .append(",\"hourOfDay\":")
+                .append(now.get(Calendar.HOUR_OF_DAY))
+                .append(",\"minute\":")
+                .append(now.get(Calendar.MINUTE))
+                .append(",\"second\":")
+                .append(now.get(Calendar.SECOND))
+                .append("},\"fired\":")
+                .append("{\"year\":")
+                .append(now.get(Calendar.YEAR))
+                .append(",\"month\":")
+                .append(now.get(Calendar.MONTH))
+                .append(",\"dayOfMonth\":")
+                .append(now.get(Calendar.DAY_OF_MONTH))
+                .append(",\"hourOfDay\":")
+                .append(now.get(Calendar.HOUR_OF_DAY))
+                .append(",\"minute\":")
+                .append(now.get(Calendar.MINUTE))
+                .append(",\"second\":")
+                .append(now.get(Calendar.SECOND))
+                .append("},\"salary\":").append(worker1.getSalary()).append("}]");
+        assertThat(hr.generate(em -> true), is(expect.toString()));
     }
 
     @Test
-    public void whenXmlReport() throws DatatypeConfigurationException {
+    @Ignore
+    public void whenXmlReportSb() throws DatatypeConfigurationException {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Danil", now, now, 100);
+        store.add(worker);
+        Report generator = new ReportXml(store);
+        XMLGregorianCalendar date = DatatypeFactory
+                .newInstance()
+                .newXMLGregorianCalendar((GregorianCalendar) now);
+        StringBuilder expect = new StringBuilder()
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>").append(System.lineSeparator())
+                .append("<empList>").append(System.lineSeparator())
+                .append("    <empList>").append(System.lineSeparator())
+                .append("        <fired>").append(date).append("</fired>").append(System.lineSeparator())
+                .append("        <hired>").append(date).append("</hired>").append(System.lineSeparator())
+                .append("        <name>").append(worker.getName()).append("</name>").append(System.lineSeparator())
+                .append("        <salary>").append(worker.getSalary()).append("</salary>").append(System.lineSeparator())
+                .append("    </empList>").append(System.lineSeparator())
+                .append("</empList>").append(System.lineSeparator());
+
+        assertThat(generator.generate(em -> true), is(expect.toString()));
+    }
+
+    @Test
+    public void whenXmlReportString() throws DatatypeConfigurationException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Danil", now, now, 100);
