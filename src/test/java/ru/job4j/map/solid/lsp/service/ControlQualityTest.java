@@ -1,7 +1,8 @@
-package ru.job4j.solid.lsp.service;
+package ru.job4j.map.solid.lsp.service;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.solid.lsp.service.*;
 import ru.job4j.solid.lsp.service.product.Apple;
 import ru.job4j.solid.lsp.service.product.Food;
 import ru.job4j.solid.lsp.service.product.Milk;
@@ -37,13 +38,6 @@ public class ControlQualityTest {
         assertThat(shop.findAllFood(), is(List.of(milk)));
     }
 
-    @Test(expected = AssertionError.class)
-    public void whenNotAddAtShop() {
-        Food milk = new Milk("Milk", LocalDateTime.now().plusMonths(3), LocalDateTime.now().minusMonths(12), 33, 22);
-        controlQuality.redefine(milk);
-        Store shop = storeList.get(0);
-        assertThat(shop.findAllFood(), is(List.of(milk)));
-    }
 
     @Test
     public void whenAddToTrash() {
