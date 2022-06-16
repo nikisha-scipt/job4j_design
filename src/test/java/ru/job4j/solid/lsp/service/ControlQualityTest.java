@@ -93,4 +93,16 @@ public class ControlQualityTest {
         assertThat(trash.findAllFood(), is(List.of(orange)));
     }
 
+    @Test
+    public void whenResortAllFoods() {
+        Food milk = new Milk("Milk", LocalDateTime.now().plusMonths(3), LocalDateTime.now().minusMonths(8), 77, 8);
+        controlQuality.redefine(milk);
+        Store shop = storeList.get(0);
+        assertThat(shop.findAllFood(), is(List.of(milk)));
+        milk.setName("new Milk for resort");
+        controlQuality.redefine(milk);
+        controlQuality.resort();
+        assertThat(shop.findAllFood(), is(List.of(milk)));
+    }
+
 }
