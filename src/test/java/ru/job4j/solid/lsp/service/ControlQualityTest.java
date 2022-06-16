@@ -1,15 +1,13 @@
-package ru.job4j.map.solid.lsp.service;
+package ru.job4j.solid.lsp.service;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.solid.lsp.service.*;
 import ru.job4j.solid.lsp.service.product.Apple;
 import ru.job4j.solid.lsp.service.product.Food;
 import ru.job4j.solid.lsp.service.product.Milk;
 import ru.job4j.solid.lsp.service.product.Orange;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -23,9 +21,9 @@ public class ControlQualityTest {
     @Before
     public void init() {
         storeList = List.of(
-                new Shop(new ArrayList<>()),
-                new Warehouse(new ArrayList<>()),
-                new Trash(new ArrayList<>())
+                new Shop(),
+                new Warehouse(),
+                new Trash()
         );
         controlQuality = new ControlQuality(storeList);
     }
@@ -61,6 +59,38 @@ public class ControlQualityTest {
         controlQuality.redefine(apple);
         Store shop = storeList.get(0);
         assertThat(shop.findAllFood(), is(List.of(apple)));
+    }
+
+    @Test
+    public void whenAddMoreFood() {
+        Food milk = new Milk("Milk", LocalDateTime.now().plusMonths(3), LocalDateTime.now().minusMonths(8), 77, 8);
+        Food apple = new Apple("Apple", LocalDateTime.now().plusMonths(8), LocalDateTime.now().minusMonths(2), 177, 11);
+        Food orange = new Orange("Orange", LocalDateTime.now(), LocalDateTime.now().minusMonths(1), 7, 10);
+        controlQuality.redefine(milk);
+        controlQuality.redefine(apple);
+        controlQuality.redefine(orange);
+        Store shop = storeList.get(0);
+        Store warehouse = storeList.get(1);
+        Store trash = storeList.get(2);
+        assertThat(shop.findAllFood(), is(List.of(milk)));
+        assertThat(warehouse.findAllFood(), is(List.of(apple)));
+        assertThat(trash.findAllFood(), is(List.of(orange)));
+    }
+
+    @Test(expected = AssertionError.class)
+    public void whenAddTrashFoodInWarehouse() {
+        Food milk = new Milk("Milk", LocalDateTime.now().plusMonths(3), LocalDateTime.now().minusMonths(8), 77, 8);
+        Food apple = new Apple("Apple", LocalDateTime.now().plusMonths(8), LocalDateTime.now().minusMonths(2), 177, 11);
+        Food orange = new Orange("Orange", LocalDateTime.now(), LocalDateTime.now().minusMonths(1), 7, 10);
+        controlQuality.redefine(milk);
+        controlQuality.redefine(apple);
+        controlQuality.redefine(orange);
+        Store shop = storeList.get(0);
+        Store warehouse = storeList.get(1);
+        Store trash = storeList.get(2);
+        assertThat(shop.findAllFood(), is(List.of(milk)));
+        assertThat(warehouse.findAllFood(), is(List.of(orange)));
+        assertThat(trash.findAllFood(), is(List.of(orange)));
     }
 
 }

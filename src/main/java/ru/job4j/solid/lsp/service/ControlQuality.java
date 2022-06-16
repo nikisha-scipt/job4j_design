@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ControlQuality {
 
-    private List<Store> store;
+    private final List<Store> store;
 
     public ControlQuality(List<Store> store) {
         this.store = store;

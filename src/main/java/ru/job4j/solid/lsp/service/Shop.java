@@ -2,25 +2,30 @@ package ru.job4j.solid.lsp.service;
 
 import ru.job4j.solid.lsp.service.product.Food;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Shop implements Store {
 
-    List<Food> foodList;
-
-    public Shop(List<Food> foodList) {
-        this.foodList = foodList;
-    }
+    private final List<Food> foodList = new ArrayList<>();
 
     @Override
     public boolean add(Food food) {
         boolean res = false;
-        if (bestBeforeDate(food) >= 25 && bestBeforeDate(food) <= 75) {
+        if (accept(food)) {
             foodList.add(food);
             res =  true;
+        }
+        return res;
+    }
+
+    @Override
+    public boolean accept(Food food) {
+        boolean res = false;
+        if (bestBeforeDate(food) >= 25 && bestBeforeDate(food) <= 75) {
+            res =  true;
         } else if (bestBeforeDate(food) > 0 && bestBeforeDate(food) < 25) {
-            food.setDiscount((int) food.getPrice() - 75);
-            foodList.add(food);
+            food.setDiscount((int) food.getPrice());
             res = true;
         }
         return res;
@@ -28,6 +33,6 @@ public class Shop implements Store {
 
     @Override
     public List<Food> findAllFood() {
-        return foodList;
+        return foodList.stream().toList();
     }
 }

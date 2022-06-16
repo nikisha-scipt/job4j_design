@@ -10,6 +10,8 @@ public interface Store {
 
     boolean add(Food food);
 
+    boolean accept(Food food);
+
     List<Food> findAllFood();
 
     default double bestBeforeDate(Food food) {
