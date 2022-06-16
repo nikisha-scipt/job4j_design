@@ -18,9 +18,7 @@ public class ParkingCar implements Parking {
     @Override
     public boolean addToParkingSpace(Car car) {
         boolean res = false;
-        if (car.getSize() < MotorCar.SIZE) {
-            throw new IllegalArgumentException("Wrong size");
-        } else if (car.getSize() == MotorCar.SIZE && countMotorCar >= MotorCar.SIZE) {
+        if (car.getSize() == MotorCar.SIZE && countMotorCar >= MotorCar.SIZE) {
             placeCar.add(car);
             countMotorCar--;
             res = true;
