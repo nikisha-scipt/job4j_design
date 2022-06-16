@@ -1,29 +1,36 @@
 package ru.job4j.solid.lsp.parking;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingCar implements Parking {
 
     private int countMotorCar;
     private int countFreightCar;
-    private List<Car> placeCar;
+    private final List<Car> placeCar;
 
-    public ParkingCar(int countMotorCar, int countFreightCar, List<Car> placeCar) {
+    public ParkingCar(int countMotorCar, int countFreightCar) {
         this.countMotorCar = countMotorCar;
         this.countFreightCar = countFreightCar;
-        this.placeCar = placeCar;
+        this.placeCar = new ArrayList<>(countFreightCar + countFreightCar);
     }
 
     @Override
     public boolean addToParkingSpace(Car car) {
         boolean res = false;
-        if (car.getSize() == 1 && countMotorCar > 0) {
+        if (car.getSize() < MotorCar.SIZE) {
+            throw new IllegalArgumentException("Wrong size");
+        } else if (car.getSize() == MotorCar.SIZE && countMotorCar >= MotorCar.SIZE) {
             placeCar.add(car);
             countMotorCar--;
             res = true;
-        } else if (car.getSize() > 1 && countFreightCar > 0) {
+        } else if (car.getSize() > MotorCar.SIZE && countFreightCar >= MotorCar.SIZE) {
             placeCar.add(car);
             countFreightCar--;
+            res = true;
+        } else if (car.getSize() > MotorCar.SIZE && countMotorCar >= car.getSize()) {
+            placeCar.add(car);
+            countMotorCar += car.getSize();
             res = true;
         }
         return res;
@@ -31,6 +38,6 @@ public class ParkingCar implements Parking {
 
     @Override
     public List<Car> findAllParkingCar() {
-        return placeCar;
+        return placeCar.stream().toList();
     }
 }
