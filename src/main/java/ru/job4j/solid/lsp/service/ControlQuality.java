@@ -15,7 +15,9 @@ public class ControlQuality {
 
     public void redefine(Food food) {
         for (Store elem : store) {
-            elem.add(food);
+            if (elem.accept(food)) {
+                elem.add(food);
+            }
         }
     }
 

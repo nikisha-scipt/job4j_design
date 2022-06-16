@@ -13,7 +13,9 @@ public class Shop implements Store {
     public boolean add(Food food) {
         boolean res = false;
         if (accept(food)) {
-            food.setDiscount((int) food.getPrice());
+            if (bestBeforeDate(food) > 0 && bestBeforeDate(food) < 25) {
+                food.setPrice(food.getPrice() - food.getDiscount());
+            }
             foodList.add(food);
             res =  true;
         }
@@ -22,14 +24,7 @@ public class Shop implements Store {
 
     @Override
     public boolean accept(Food food) {
-        boolean res = false;
-        if (bestBeforeDate(food) >= 25 && bestBeforeDate(food) <= 75) {
-            res =  true;
-        } else if (bestBeforeDate(food) > 0 && bestBeforeDate(food) < 25) {
-            food.setDiscount((int) food.getPrice());
-            res = true;
-        }
-        return res;
+        return bestBeforeDate(food) > 0 && bestBeforeDate(food) <= 75;
     }
 
     @Override
