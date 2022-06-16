@@ -38,8 +38,7 @@ public class ControlQualityTest {
     public void whenAddToShop() {
         Food milk = new Milk("Milk", LocalDateTime.now().plusMonths(3), LocalDateTime.now().minusMonths(8), 77, 8);
         controlQuality.redefine(milk);
-        shop = storeList.get(0);
-        assertThat(shop.findAllFood(), is(List.of(milk)));
+        assertThat(storeList.get(0).findAllFood(), is(List.of(milk)));
     }
 
 
@@ -47,24 +46,21 @@ public class ControlQualityTest {
     public void whenAddToTrash() {
         Food orange = new Orange("Orange", LocalDateTime.now(), LocalDateTime.now().minusMonths(1), 7, 10);
         controlQuality.redefine(orange);
-        shop = storeList.get(2);
-        assertThat(shop.findAllFood(), is(List.of(orange)));
+        assertThat(storeList.get(2).findAllFood(), is(List.of(orange)));
     }
 
     @Test
     public void whenAddToWarehouse() {
         Food apple = new Apple("Apple", LocalDateTime.now().plusMonths(8), LocalDateTime.now().minusMonths(2), 177, 11);
         controlQuality.redefine(apple);
-        shop = storeList.get(1);
-        assertThat(shop.findAllFood(), is(List.of(apple)));
+        assertThat(storeList.get(1).findAllFood(), is(List.of(apple)));
     }
 
     @Test
     public void whenAddToShopAndApplyDiscount() {
         Food apple = new Apple("Apple", LocalDateTime.now().plusDays(3), LocalDateTime.now().minusMonths(1), 11, 29);
         controlQuality.redefine(apple);
-        shop = storeList.get(0);
-        assertThat(shop.findAllFood(), is(List.of(apple)));
+        assertThat(storeList.get(0).findAllFood(), is(List.of(apple)));
     }
 
     @Test
@@ -75,12 +71,9 @@ public class ControlQualityTest {
         controlQuality.redefine(milk);
         controlQuality.redefine(apple);
         controlQuality.redefine(orange);
-        shop = storeList.get(0);
-        warehouse = storeList.get(1);
-        trash = storeList.get(2);
-        assertThat(shop.findAllFood(), is(List.of(milk)));
-        assertThat(warehouse.findAllFood(), is(List.of(apple)));
-        assertThat(trash.findAllFood(), is(List.of(orange)));
+        assertThat(storeList.get(0).findAllFood(), is(List.of(milk)));
+        assertThat(storeList.get(1).findAllFood(), is(List.of(apple)));
+        assertThat(storeList.get(2).findAllFood(), is(List.of(orange)));
     }
 
     @Test(expected = AssertionError.class)
@@ -91,24 +84,20 @@ public class ControlQualityTest {
         controlQuality.redefine(milk);
         controlQuality.redefine(apple);
         controlQuality.redefine(orange);
-        shop = storeList.get(0);
-        warehouse = storeList.get(1);
-        trash = storeList.get(2);
-        assertThat(shop.findAllFood(), is(List.of(milk)));
-        assertThat(warehouse.findAllFood(), is(List.of(orange)));
-        assertThat(trash.findAllFood(), is(List.of(orange)));
+        assertThat(storeList.get(0).findAllFood(), is(List.of(milk)));
+        assertThat(storeList.get(1).findAllFood(), is(List.of(orange)));
+        assertThat(storeList.get(2).findAllFood(), is(List.of(orange)));
     }
 
     @Test
     public void whenResortAllFoods() {
         Food milk = new Milk("Milk", LocalDateTime.now().plusMonths(3), LocalDateTime.now().minusMonths(8), 77, 8);
         controlQuality.redefine(milk);
-        shop = storeList.get(0);
-        assertThat(shop.findAllFood(), is(List.of(milk)));
+        assertThat(storeList.get(0).findAllFood(), is(List.of(milk)));
         milk.setName("new Milk for resort");
         controlQuality.redefine(milk);
         controlQuality.resort();
-        assertThat(shop.findAllFood(), is(List.of(milk)));
+        assertThat(storeList.get(0).findAllFood(), is(List.of(milk)));
     }
 
 }
