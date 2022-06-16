@@ -27,6 +27,8 @@ public class Warehouse implements Store {
 
     @Override
     public List<Food> findAllFood() {
-        return foodList.stream().toList();
+        List<Food> list = new ArrayList<>(foodList);
+        foodList.clear();
+        return list;
     }
 }
