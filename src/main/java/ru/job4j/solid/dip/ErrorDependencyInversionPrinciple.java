@@ -61,7 +61,11 @@ public class ErrorDependencyInversionPrinciple {
         }
 
         boolean add() {
-            return studentMap.put((int) (Math.random() * 100), student) != null;
+            boolean res = studentMap.put((int) (Math.random() * 100), student) != null;
+            if (!res) {
+                System.out.println("not add at map...");
+            }
+            return res;
         }
 
         @Override
