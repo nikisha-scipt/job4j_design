@@ -17,13 +17,19 @@ public class ControlQualityTest {
 
     private List<Store> storeList;
     private ControlQuality controlQuality;
+    private Store shop;
+    private Store warehouse;
+    private Store trash;
 
     @Before
     public void init() {
+        Store shop = new Shop();
+        Store warehouse = new Warehouse();
+        Store trash = new Trash();
         storeList = List.of(
-                new Shop(),
-                new Warehouse(),
-                new Trash()
+                shop,
+                warehouse,
+                trash
         );
         controlQuality = new ControlQuality(storeList);
     }
@@ -32,7 +38,7 @@ public class ControlQualityTest {
     public void whenAddToShop() {
         Food milk = new Milk("Milk", LocalDateTime.now().plusMonths(3), LocalDateTime.now().minusMonths(8), 77, 8);
         controlQuality.redefine(milk);
-        Store shop = storeList.get(0);
+        shop = storeList.get(0);
         assertThat(shop.findAllFood(), is(List.of(milk)));
     }
 
@@ -41,7 +47,7 @@ public class ControlQualityTest {
     public void whenAddToTrash() {
         Food orange = new Orange("Orange", LocalDateTime.now(), LocalDateTime.now().minusMonths(1), 7, 10);
         controlQuality.redefine(orange);
-        Store shop = storeList.get(2);
+        shop = storeList.get(2);
         assertThat(shop.findAllFood(), is(List.of(orange)));
     }
 
@@ -49,7 +55,7 @@ public class ControlQualityTest {
     public void whenAddToWarehouse() {
         Food apple = new Apple("Apple", LocalDateTime.now().plusMonths(8), LocalDateTime.now().minusMonths(2), 177, 11);
         controlQuality.redefine(apple);
-        Store shop = storeList.get(1);
+        shop = storeList.get(1);
         assertThat(shop.findAllFood(), is(List.of(apple)));
     }
 
@@ -57,7 +63,7 @@ public class ControlQualityTest {
     public void whenAddToShopAndApplyDiscount() {
         Food apple = new Apple("Apple", LocalDateTime.now().plusDays(3), LocalDateTime.now().minusMonths(1), 11, 29);
         controlQuality.redefine(apple);
-        Store shop = storeList.get(0);
+        shop = storeList.get(0);
         assertThat(shop.findAllFood(), is(List.of(apple)));
     }
 
@@ -69,9 +75,9 @@ public class ControlQualityTest {
         controlQuality.redefine(milk);
         controlQuality.redefine(apple);
         controlQuality.redefine(orange);
-        Store shop = storeList.get(0);
-        Store warehouse = storeList.get(1);
-        Store trash = storeList.get(2);
+        shop = storeList.get(0);
+        warehouse = storeList.get(1);
+        trash = storeList.get(2);
         assertThat(shop.findAllFood(), is(List.of(milk)));
         assertThat(warehouse.findAllFood(), is(List.of(apple)));
         assertThat(trash.findAllFood(), is(List.of(orange)));
@@ -85,9 +91,9 @@ public class ControlQualityTest {
         controlQuality.redefine(milk);
         controlQuality.redefine(apple);
         controlQuality.redefine(orange);
-        Store shop = storeList.get(0);
-        Store warehouse = storeList.get(1);
-        Store trash = storeList.get(2);
+        shop = storeList.get(0);
+        warehouse = storeList.get(1);
+        trash = storeList.get(2);
         assertThat(shop.findAllFood(), is(List.of(milk)));
         assertThat(warehouse.findAllFood(), is(List.of(orange)));
         assertThat(trash.findAllFood(), is(List.of(orange)));
@@ -97,7 +103,7 @@ public class ControlQualityTest {
     public void whenResortAllFoods() {
         Food milk = new Milk("Milk", LocalDateTime.now().plusMonths(3), LocalDateTime.now().minusMonths(8), 77, 8);
         controlQuality.redefine(milk);
-        Store shop = storeList.get(0);
+        shop = storeList.get(0);
         assertThat(shop.findAllFood(), is(List.of(milk)));
         milk.setName("new Milk for resort");
         controlQuality.redefine(milk);

@@ -13,6 +13,7 @@ public class Shop implements Store {
     public boolean add(Food food) {
         boolean res = false;
         if (accept(food)) {
+            food.setDiscount((int) food.getPrice());
             foodList.add(food);
             res =  true;
         }
