@@ -1,4 +1,4 @@
-package ru.job4j.serialization.json.taskjson;
+package ru.job4j.io.serialization.json.taskjson;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

@@ -1,4 +1,4 @@
-package ru.job4j.serialization.xml;
+package ru.job4j.io.serialization.xml;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;

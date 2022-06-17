@@ -1,4 +1,4 @@
-package ru.job4j.serialization.json;
+package ru.job4j.io.serialization.json;
 
 import org.json.JSONObject;
 
@@ -21,5 +21,6 @@ public class A {
         b.setA(a);
 
         System.out.println(new JSONObject(a));
+        System.out.println(new JSONObject(b));
     }
 }

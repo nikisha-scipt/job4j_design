@@ -21,6 +21,7 @@ public class ControlQualityTest {
     private Store warehouse;
     private Store trash;
 
+
     @Before
     public void init() {
         shop = new Shop();

@@ -1,4 +1,4 @@
-package ru.job4j.serialization.xml;
+package ru.job4j.io.serialization.xml;
 
 import java.util.Arrays;
 import javax.xml.bind.JAXBContext;
