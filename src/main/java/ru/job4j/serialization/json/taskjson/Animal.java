@@ -1,9 +1,12 @@
 package ru.job4j.serialization.json.taskjson;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
 @XmlRootElement(name = "type")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Animal {
 
     private String type;
