@@ -32,16 +32,26 @@ public class CSVReader {
                                 sb.append(strArr[i]).append(System.lineSeparator());
                             } else {
                                 sb.append(strArr[i]).append(";");
-
                             }
                         }
                     }
                 }
             }
-            try (BufferedWriter bf = new BufferedWriter(new FileWriter(argsName.get("out")))) {
-                bf.write(sb.toString());
+            if (argsName.get("out").equals("stdout")) {
+                try (BufferedWriter bf = new BufferedWriter(new FileWriter(argsName.get("out")))) {
+                    bf.write(sb.toString());
+                }
+                System.out.println(sb);
+            } else {
+                try (BufferedWriter bf = new BufferedWriter(new FileWriter(argsName.get("out")))) {
+                    bf.write(sb.toString());
+                    try (FileWriter writer = new FileWriter("result.txt")) {
+                        writer.write(bf.toString());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            System.out.println(sb);
         }
 
     }
