@@ -32,6 +32,26 @@ public class Tiger {
     public Tiger() {
     }
 
+    public boolean isFly() {
+        return isFly;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Animal getType() {
+        return type;
+    }
+
+    public String[] getLocation() {
+        return location;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
