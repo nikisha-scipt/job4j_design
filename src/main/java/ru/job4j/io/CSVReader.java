@@ -37,7 +37,7 @@ public class CSVReader {
                     }
                 }
             }
-            if (argsName.get("out").equals("stdout")) {
+            if ("stdout".equals(argsName.get("out"))) {
                 try (BufferedWriter bf = new BufferedWriter(new FileWriter(argsName.get("out")))) {
                     bf.write(sb.toString());
                 }
