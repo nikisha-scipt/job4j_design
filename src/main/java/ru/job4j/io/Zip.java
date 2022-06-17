@@ -38,6 +38,9 @@ public class Zip {
     private static class Valid {
 
         private final ArgsName args;
+        private String root;
+        private String exclude;
+        private String out;
         private final int size;
 
         public Valid(String[] args) {
@@ -49,16 +52,32 @@ public class Zip {
             return size == 3;
         }
 
-        public String dir() {
-            return args.get("d");
+        public boolean dir() {
+            boolean res = false;
+            File temp = new File(args.get("d"));
+            if (temp.isDirectory()) {
+                root = String.valueOf(Paths.get(temp.getPath()));
+                res = true;
+            }
+            return res;
         }
 
-        public String exclude() {
-            return args.get("e");
+        public boolean exclude() {
+            boolean res = false;
+            if (args.get("e").startsWith(".")) {
+                exclude = args.get("e");
+                res = true;
+            }
+            return res;
         }
 
-        public String out() {
-            return args.get("o");
+        public boolean out() {
+            boolean res = false;
+            if (args.get("o").contains(".zip")) {
+                out = args.get("o");
+                res = true;
+            }
+            return res;
         }
 
         public boolean isValid() {
@@ -73,20 +92,33 @@ public class Zip {
             return true;
         }
 
+        public String getRoot() {
+            return root;
+        }
+
+        public String getExclude() {
+            return exclude;
+        }
+
+        public String getOut() {
+            return out;
+        }
+
     }
 
 
     public static void main(String[] args) throws IOException, IllegalAccessException {
         Valid valid = new Valid(args);
         if (valid.isValid()) {
-            Path root = Paths.get(valid.dir());
+            Path root = Paths.get(valid.getRoot());
             List<Path> sourcesPath = Search.search(root, p ->
-                    !p.toFile().getName().endsWith(valid.exclude()));
+                    !p.toFile().getName().startsWith(valid.getExclude()));
             List<File> sources = sourcesPath.stream()
                     .map(Path::toFile)
                     .collect(Collectors.toList());
-            new Zip().packFiles(sources, new File(valid.out()));
+            new Zip().packFiles(sources, new File(valid.getOut()));
         }
+
     }
 
 }
