@@ -87,7 +87,7 @@ public class Zip {
                 exclude();
                 out();
             } catch (IllegalArgumentException e) {
-                e.printStackTrace();
+                throw new IllegalArgumentException("Format:-d=C:\\ -e=.class -o=project.zip");
             }
             return true;
         }
