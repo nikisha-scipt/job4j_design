@@ -8,16 +8,19 @@ public class SimpleMenu implements Menu {
 
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
-        boolean res = false;
         if (findItem(childName).isPresent()) {
-            res = false;
+           return false;
         }
-        Objects.equals(SimpleMenu.ROOT, parentName);
-        if (findItem(parentName).isPresent()) {
+        if (Objects.equals(SimpleMenu.ROOT, parentName)) {
             rootElements.add(new SimpleMenuItem(parentName, actionDelegate));
-            res = true;
+           return true;
         }
-        return res;
+        var parentOptional = findItem(parentName);
+        if (parentOptional.isEmpty()) {
+            return false;
+        }
+        parentOptional.get().menuItem.getChildren().add(new SimpleMenuItem(childName, actionDelegate));
+        return true;
     }
 
     @Override
@@ -37,10 +40,8 @@ public class SimpleMenu implements Menu {
 
             @Override
             public MenuItemInfo next() {
-                /*
-                    return dfsIterator.next(); exception
-                 */
-                return null;
+                var item = dfsIterator.next();
+                return new MenuItemInfo(item.menuItem, item.number);
             }
         };
     }
