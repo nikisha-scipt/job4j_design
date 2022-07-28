@@ -27,7 +27,7 @@ public class FinderFiles extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
         if (type.equals("mask")) {
             files.add(file);
-        } else if (type.contains(".") && file.toFile().getName().equals(fileFinder)) {
+        } else if (type.equals("name") && file.toFile().getName().equals(fileFinder)) {
             files.add(file);
         }
         return FileVisitResult.CONTINUE;

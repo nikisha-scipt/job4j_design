@@ -34,7 +34,7 @@ public class Validation {
 
     private boolean checkFileMask() {
         boolean res = false;
-        if (args.get("n").equals("*")) {
+        if (args.get("n").equals("*.?")) {
             nameFile = args.get("n");
             res = true;
         }
@@ -43,7 +43,7 @@ public class Validation {
 
     private boolean checkFileName() {
         boolean res = false;
-        if (args.get("n").contains(".")) {
+        if (!args.get("n").isEmpty()) {
             nameFile = args.get("n");
             res = true;
         }
@@ -52,11 +52,11 @@ public class Validation {
 
 
     private boolean checkTypeFinder() {
-        boolean res;
+        boolean res = false;
         typeFinder = args.get("t");
         if (typeFinder.equals("mask")) {
             res = checkFileMask();
-        } else {
+        } else if (typeFinder.equals("name")) {
             res = checkFileName();
         }
         return res;
