@@ -25,7 +25,10 @@ public class FinderFiles extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-        if (type.equals("mask")) {
+        if (type.equals("mask") && file.toFile().getName().matches(fileFinder
+                .replace(".", "[.]")
+                .replace("*", ".+")
+                .replace("?", "."))) {
             files.add(file);
         } else if (type.equals("name") && file.toFile().getName().equals(fileFinder)) {
             files.add(file);
