@@ -1,4 +1,0 @@
-D:\test\a.txt
-D:\test\b.txt
-D:\test\c.txt
-D:\test\y\123.txt
