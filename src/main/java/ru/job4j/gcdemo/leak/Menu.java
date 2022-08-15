@@ -17,13 +17,12 @@ public class Menu {
     public final String textOfPost = "Введите текст";
     public final String exit = "Конец работы";
 
-    public final String menu = """
-                Введите 1 для создание поста.
-                Введите 2, чтобы создать определенное количество постов.
-                Введите 3, чтобы показать все посты.
-                Введите 4, чтобы удалить все посты.
-                Введите любое другое число для выхода.
-            """;
+    public final String menu =
+                "Введите 1 для создание поста.\n"
+                + "Введите 2, чтобы создать определенное количество постов.\n"
+                + "Введите 3, чтобы показать все посты.\n"
+                + "Введите 4, чтобы удалить все посты.\n"
+                + "Введите любое другое число для выхода.";
 
     private void start(CommentGenerator commentGenerator, Scanner scanner, UserGenerator userGenerator, PostStore postStore) {
         boolean run = true;
