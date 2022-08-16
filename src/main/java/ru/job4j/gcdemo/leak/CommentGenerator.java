@@ -11,11 +11,12 @@ public class CommentGenerator implements Generate {
 
     public static final String PATH_PHRASES = "D:\\java\\job4j\\project\\job4j_design\\src\\main\\java\\ru\\job4j\\gcdemo\\leak\\utils\\phrases.txt";
     public static final String SEPARATOR = System.lineSeparator();
-    private final List<Comment> comments = new ArrayList<>();
     public static final int COUNT = 50;
-    private List<String> phrases;
+
+    private final List<Comment> comments = new ArrayList<>();
     private final UserGenerator userGenerator;
     private final Random random;
+    private List<String> phrases;
 
     public CommentGenerator(Random random, UserGenerator userGenerator) {
         this.userGenerator = userGenerator;
@@ -42,10 +43,11 @@ public class CommentGenerator implements Generate {
         random.ints(0, phrases.size())
                 .distinct().limit(3).forEach(ints::add);
         for (int i = 0; i < COUNT; i++) {
-            String comment = phrases.get(ints.get(0)) + SEPARATOR
+            StringBuilder comment = new StringBuilder(
+                    phrases.get(ints.get(0)) + SEPARATOR
                     + phrases.get(ints.get(1)) + SEPARATOR
-                    + phrases.get(ints.get(2));
-            comments.add(new Comment(comment,
+                    + phrases.get(ints.get(2)));
+            comments.add(new Comment(comment.toString(),
                     userGenerator.randomUser()));
         }
     }

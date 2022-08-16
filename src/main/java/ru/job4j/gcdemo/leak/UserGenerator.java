@@ -41,11 +41,14 @@ public class UserGenerator implements Generate {
     @Override
     public void generate() {
         users.clear();
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < NEW_USERS; i++) {
-            users.add(new User(
-                    surnames.get(random.nextInt(surnames.size())) + SEPARATOR
-                            + names.get(random.nextInt(names.size())) + SEPARATOR
-                            + patrons.get(random.nextInt(patrons.size()))));
+            builder.append(surnames.get(random.nextInt(surnames.size())))
+                    .append(SEPARATOR)
+                    .append(names.get(random.nextInt(names.size())))
+                    .append(SEPARATOR)
+                    .append(patrons.get(random.nextInt(patrons.size())));
+            users.add(new User(builder.toString()));
         }
     }
 
