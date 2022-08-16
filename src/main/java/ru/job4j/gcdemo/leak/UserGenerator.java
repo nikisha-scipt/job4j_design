@@ -9,12 +9,12 @@ import java.util.Random;
 
 public class UserGenerator implements Generate {
 
-    public final String pathNames = "D:\\java\\job4j\\project\\job4j_design\\src\\main\\java\\ru\\job4j\\gcdemo\\leak\\utils\\names.txt";
-    public final String pathSurnames = "D:\\java\\job4j\\project\\job4j_design\\src\\main\\java\\ru\\job4j\\gcdemo\\leak\\utils\\surnames.txt";
-    public final String pathPatrons = "D:\\java\\job4j\\project\\job4j_design\\src\\main\\java\\ru\\job4j\\gcdemo\\leak\\utils\\patr.txt";
+    public static final String PATH_NAMES = "D:\\java\\job4j\\project\\job4j_design\\src\\main\\java\\ru\\job4j\\gcdemo\\leak\\utils\\names.txt";
+    public static final String PATH_SURNAMES = "D:\\java\\job4j\\project\\job4j_design\\src\\main\\java\\ru\\job4j\\gcdemo\\leak\\utils\\surnames.txt";
+    public static final String PATH_PATRONS = "D:\\java\\job4j\\project\\job4j_design\\src\\main\\java\\ru\\job4j\\gcdemo\\leak\\utils\\patr.txt";
 
-    public final String separator = " ";
-    public final Integer newUsers = 1000;
+    public static final String SEPARATOR = " ";
+    public static final int NEW_USERS = 1000;
 
     public List<String> names;
     public List<String> surnames;
@@ -30,9 +30,9 @@ public class UserGenerator implements Generate {
 
     private void readAll() {
         try {
-            names = read(pathNames);
-            surnames = read(pathSurnames);
-            patrons = read(pathPatrons);
+            names = read(PATH_NAMES);
+            surnames = read(PATH_SURNAMES);
+            patrons = read(PATH_PATRONS);
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
@@ -41,10 +41,10 @@ public class UserGenerator implements Generate {
     @Override
     public void generate() {
         users.clear();
-        for (int i = 0; i < newUsers; i++) {
+        for (int i = 0; i < NEW_USERS; i++) {
             users.add(new User(
-                    surnames.get(random.nextInt(surnames.size())) + separator
-                            + names.get(random.nextInt(names.size())) + separator
+                    surnames.get(random.nextInt(surnames.size())) + SEPARATOR
+                            + names.get(random.nextInt(names.size())) + SEPARATOR
                             + patrons.get(random.nextInt(patrons.size()))));
         }
     }
@@ -53,7 +53,4 @@ public class UserGenerator implements Generate {
         return users.get(random.nextInt(users.size()));
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
 }

@@ -17,7 +17,7 @@ public interface Generate {
                 text.add(read);
             }
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return text;
     }

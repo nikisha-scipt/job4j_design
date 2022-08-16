@@ -3,11 +3,12 @@ package ru.job4j.gcdemo.leak;
 import ru.job4j.gcdemo.leak.model.Post;
 
 import java.util.Collection;
-import java.util.WeakHashMap;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PostStore {
 
-    private final WeakHashMap<Integer, Post> posts = new WeakHashMap<>();
+    private final Map<Integer, Post> posts = new HashMap<>();
     private int id;
 
     public Post add(Post post) {
