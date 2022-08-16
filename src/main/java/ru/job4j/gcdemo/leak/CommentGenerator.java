@@ -40,13 +40,15 @@ public class CommentGenerator implements Generate {
     public void generate() {
         comments.clear();
         List<Integer> ints = new ArrayList<>();
+        StringBuilder comment = new StringBuilder();
         random.ints(0, phrases.size())
                 .distinct().limit(3).forEach(ints::add);
         for (int i = 0; i < COUNT; i++) {
-            StringBuilder comment = new StringBuilder(
-                    phrases.get(ints.get(0)) + SEPARATOR
-                    + phrases.get(ints.get(1)) + SEPARATOR
-                    + phrases.get(ints.get(2)));
+            comment.append(phrases.get(ints.get(0)))
+                    .append(SEPARATOR)
+                    .append(phrases.get(ints.get(1)))
+                    .append(SEPARATOR)
+                    .append(phrases.get(ints.get(2)));
             comments.add(new Comment(comment.toString(),
                     userGenerator.randomUser()));
         }
