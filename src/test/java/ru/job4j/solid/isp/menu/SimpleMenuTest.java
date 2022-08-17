@@ -1,6 +1,5 @@
 package ru.job4j.solid.isp.menu;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -12,7 +11,6 @@ public class SimpleMenuTest {
     public static final ActionDelegate STUB_ACTION = System.out::println;
 
     @Test
-    //@Ignore
     public void whenAddThenReturnSame() {
         Menu menu = new SimpleMenu();
         menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
