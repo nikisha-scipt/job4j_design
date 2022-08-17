@@ -12,7 +12,7 @@ public class SimpleMenuTest {
     public static final ActionDelegate STUB_ACTION = System.out::println;
 
     @Test
-    @Ignore
+    //@Ignore
     public void whenAddThenReturnSame() {
         Menu menu = new SimpleMenu();
         menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);

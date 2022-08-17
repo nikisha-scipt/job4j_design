@@ -8,19 +8,20 @@ public class SimpleMenu implements Menu {
 
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
+        boolean res = false;
         if (findItem(childName).isPresent()) {
            return false;
         }
-        if (Objects.equals(SimpleMenu.ROOT, parentName)) {
-            rootElements.add(new SimpleMenuItem(parentName, actionDelegate));
-           return true;
+        SimpleMenuItem simpleMenuItem = new SimpleMenuItem(childName, actionDelegate);
+        if (Objects.equals(parentName, Menu.ROOT)) {
+            res = rootElements.add(simpleMenuItem);
+        } else {
+            Optional<ItemInfo> itemInfo = findItem(parentName);
+            if (itemInfo.isPresent()) {
+                res = itemInfo.get().menuItem.getChildren().add(simpleMenuItem);
+            }
         }
-        var parentOptional = findItem(parentName);
-        if (parentOptional.isEmpty()) {
-            return false;
-        }
-        parentOptional.get().menuItem.getChildren().add(new SimpleMenuItem(childName, actionDelegate));
-        return true;
+        return res;
     }
 
     @Override
@@ -47,11 +48,12 @@ public class SimpleMenu implements Menu {
     }
 
     private Optional<ItemInfo> findItem(String name) {
-        DFSIterator iterator = new DFSIterator();
         Optional<ItemInfo> res = Optional.empty();
-        for (ItemInfo i = iterator.next(); iterator.hasNext(); iterator.next()) {
-            if (Objects.equals(name, i.menuItem.getName())) {
-                res = Optional.of(i);
+        DFSIterator dfsIterator = new DFSIterator();
+        while (dfsIterator.hasNext()) {
+            ItemInfo itemInfo = dfsIterator.next();
+            if (name.equals(itemInfo.menuItem.getName())) {
+                res = Optional.of(itemInfo);
                 break;
             }
         }
@@ -60,9 +62,9 @@ public class SimpleMenu implements Menu {
 
     private static class SimpleMenuItem implements MenuItem {
 
-        private String name;
-        private List<MenuItem> children = new ArrayList<>();
-        private ActionDelegate actionDelegate;
+        private final String name;
+        private final List<MenuItem> children = new ArrayList<>();
+        private final ActionDelegate actionDelegate;
 
         public SimpleMenuItem(String name, ActionDelegate actionDelegate) {
             this.name = name;
@@ -86,7 +88,6 @@ public class SimpleMenu implements Menu {
     }
 
     private class DFSIterator implements Iterator<ItemInfo> {
-
         Deque<MenuItem> stack = new LinkedList<>();
         Deque<String> numbers = new LinkedList<>();
 
@@ -112,7 +113,7 @@ public class SimpleMenu implements Menu {
             String lastNumber = numbers.removeFirst();
             List<MenuItem> children = current.getChildren();
             int currentNumber = children.size();
-            for (var i = children.listIterator(children.size()); i.hasPrevious();) {
+            for (ListIterator<MenuItem> i = children.listIterator(children.size()); i.hasPrevious();) {
                 stack.addFirst(i.previous());
                 numbers.addFirst(lastNumber.concat(String.valueOf(currentNumber--)).concat("."));
             }
