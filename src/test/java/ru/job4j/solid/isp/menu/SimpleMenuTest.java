@@ -65,14 +65,14 @@ public class SimpleMenuTest {
             menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
             MenuPrinter consoleMenuPrinter = new ConsoleMenuPrinter();
             consoleMenuPrinter.print(menu);
-            String builder = "1.Сходить в магазин" +
-                    System.lineSeparator() +
-                    "----1.1.Купить продукты" +
-                    System.lineSeparator() +
-                    "--------1.1.1.Купить хлеб" +
-                    System.lineSeparator() +
-                    "2.Покормить собаку" +
-                    System.lineSeparator();
+            String builder = "1.Сходить в магазин"
+                   +  System.lineSeparator()
+                   +  "----1.1.Купить продукты"
+                   +  System.lineSeparator()
+                   +  "--------1.1.1.Купить хлеб"
+                   +  System.lineSeparator()
+                   +  "2.Покормить собаку"
+                   +  System.lineSeparator();
             assertEquals(builder, byteArrayOutputStream.toString());
         } catch (IOException e) {
             e.printStackTrace();
