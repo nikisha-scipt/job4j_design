@@ -56,7 +56,7 @@ public class SimpleMenuTest {
 
     @Test
     public void whenPrintMenu() {
-        try(ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
             System.setOut(new PrintStream(byteArrayOutputStream));
             Menu menu = new SimpleMenu();
             menu.add(Menu.ROOT, "Сходить в магазин", STUB_ACTION);
