@@ -16,9 +16,11 @@ public class TODOApp {
 
     public static final String YES = "yes";
 
-    public static final StringBuilder MENU = new StringBuilder("Введите 1 для добавление задачи в корень.\n"
-            + "Введите 2, для вывода меню.\n"
-            + "Введите любое другое число для выхода.");
+    public static final String MENU = """
+            Введите 1 для добавление задачи в корень.
+            Введите 2, для вывода меню.
+            Введите любое другое число для выхода.
+            """;
 
     public void start() throws IOException {
         Menu menuSimple = new SimpleMenu();
