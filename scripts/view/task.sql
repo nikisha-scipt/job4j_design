@@ -13,16 +13,16 @@ insert into books(title, author, price, amount) values
     ('Стихотворения и поэмы', 'Есенин С.А.', 550.00, 25);
 
 create view show_books_with_max_price
-    as  select title as Название,
-    author as Автор,
-    price as 'Цена книги',
-    amount as 'В кол-ве',
-    max(price) as 'Самая дорогая книга'
-        from book
+    as select title as "Название",
+    author as "Автор",
+    price as "Цена книги",
+    amount as "В кол-ве",
+    max(price) as "Самая дорогая книга"
+        from books
         where
-            round((price * amount), 2) < 5000
+            round((price * amount)::numeric, 2) < 5000
             and
             title like '%_ %_'
-            and price = (select max(price) from book)
+            and price = (select max(price) from books)
     group by title, author, price, amount
     order by author desc;
