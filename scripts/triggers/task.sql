@@ -32,8 +32,7 @@ create or replace function before_tax()
     returns trigger as
 $$
     BEGIN
-        update products
-        set NEW.price = NEW.price - (NEW.price * 0.13);
+        NEW.price = NEW.price - (NEW.price * 0.13);
         return NEW;
     END;
 $$
