@@ -33,7 +33,7 @@ create or replace function before_tax()
 $$
     BEGIN
         update products
-        set NEW.price = price - (price * 0.13);
+        set NEW.price = NEW.price - (NEW.price * 0.13);
         return NEW;
     END;
 $$
