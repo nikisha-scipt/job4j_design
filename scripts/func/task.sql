@@ -6,7 +6,7 @@ create table products (
     price integer
 );
 
-create or replace procedure drop_row_procedure(u_id)
+create or replace procedure drop_row_procedure(u_id integer)
 language 'plpgsql'
 as $$
     BEGIN
@@ -14,7 +14,7 @@ as $$
     END;
 $$;
 
-create or replace function drop_row_func(u_id)
+create or replace function drop_row_func(u_id integer)
 returns integer
 language 'plpgsql'
 as $$
