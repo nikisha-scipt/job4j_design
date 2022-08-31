@@ -7,13 +7,6 @@ create table products (
 );
 
 -- 1
-create trigger first_trigger
-    after insert
-    on products
-    referencing new table as temp_table
-    for each statement
-    execute procedure after_tax();
-
 create or replace function after_tax()
     returns trigger as
 $$
@@ -26,24 +19,32 @@ $$
 $$
 LANGUAGE 'plpgsql';
 
+create trigger first_trigger
+    after insert
+    on products
+    referencing new table as temp_table
+    for each statement
+    execute procedure after_tax();
+
+
 -- 2
+create or replace function before_tax()
+    returns trigger as
+$$
+    BEGIN
+        update products
+        set NEW.price = price - (price * 0.13);
+        return NEW;
+    END;
+$$
+LANGUAGE 'plpgsql';
+
 create trigger second_trigger
     before insert
     on products
     for each row
     execute procedure before_tax();
 
-create or replace function before_tax()
-    returns trigger as
-$$
-    BEGIN
-        update products
-        set price = price - (price * 0.13)
-        where id = new.id;
-        return NEW;
-    END;
-$$
-LANGUAGE 'plpgsql';
 
 
 -- 3
@@ -53,13 +54,6 @@ create table history_of_price (
     price integer,
     date timestamp
 );
-
-create trigger three_trigger
-    after insert
-    on product
-    for each row
-    execute procedure insert_history();
-
 create or replace function insert_history()
      returns trigger as
 $$
@@ -70,3 +64,10 @@ $$
     END;
 $$
 LANGUAGE 'plpgsql';
+
+create trigger three_trigger
+    after insert
+    on product
+    for each row
+    execute procedure insert_history();
+
